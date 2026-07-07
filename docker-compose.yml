@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: anderson-cv-app
+    container_name: cv-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      CAREER_OPS_PATH: /var/www_parent/career-ops
+    volumes:
+      - ./:/var/www
+      - ..:/var/www_parent
+    networks:
+      - cv-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: cv-nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "8118:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - cv-network
+
+networks:
+  cv-network:
+    driver: bridge
