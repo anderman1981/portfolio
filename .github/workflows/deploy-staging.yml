@@ -27,16 +27,18 @@ jobs:
             StrictHostKeyChecking no
             ControlMaster auto
             ControlPath ~/.ssh/ctrl-%C
-            ControlPersist 60s
+            ControlPersist 120s
           EOF
           ssh -fNT hostinger-cv
 
       - name: Sync files via rsync
         run: |
           rsync -az --delete \
+            --ignore-errors \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='node_modules' \
+            --exclude='vendor' \
             --exclude='.env' \
             --exclude='storage/logs' \
             --exclude='storage/framework/cache' \
@@ -44,9 +46,18 @@ jobs:
             --exclude='storage/framework/views' \
             --exclude='storage/app/public/chat-uploads' \
             --exclude='database/database.sqlite' \
+            --exclude='public/js/filament' \
+            --exclude='public/css/filament' \
             -e "ssh -o ControlPath=~/.ssh/ctrl-%C" \
             ./ \
-            hostinger-cv:${{ secrets.HOSTINGER_DEPLOY_PATH }}/
+            hostinger-cv:${{ secrets.HOSTINGER_DEPLOY_PATH }}/ || [ $? -eq 24 ]
+
+      - name: Install/update Composer dependencies
+        run: |
+          ssh hostinger-cv "
+            cd ${{ secrets.HOSTINGER_DEPLOY_PATH }}
+            composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev 2>&1 | tail -5
+          "
 
       - name: Post-deploy artisan commands
         run: |
