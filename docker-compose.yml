@@ -17,6 +17,23 @@ services:
     networks:
       - cv-network
 
+  scheduler:
+    image: anderson-cv-app
+    container_name: cv-scheduler
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      SERVICE_NAME: scheduler
+      CAREER_OPS_PATH: /var/www_parent/career-ops
+    volumes:
+      - ./:/var/www
+      - ..:/var/www_parent
+    working_dir: /var/www
+    command: php artisan schedule:work
+    networks:
+      - cv-network
+
   nginx:
     image: nginx:alpine
     container_name: cv-nginx

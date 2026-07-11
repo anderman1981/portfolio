@@ -4,7 +4,7 @@ return [
     'hero' => [
         'title' => 'AI Solutions Architect',
         'subtitle' => '& Tech Lead',
-        'description' => 'Líder Técnico y Desarrollador Full Stack con 17 años de trayectoria en TI y desarrollo de software. Experto en arquitecturas backend (Node.js, Python, PHP, Laravel), automatización con IA (Gemini/OpenAI, NLP) y liderazgo de equipos tecnológicos.',
+        'description' => 'Líder Técnico y Desarrollador Full Stack con 17+ años transformando empresas con arquitecturas backend, automatización con IA, integración de sistemas y liderazgo de equipos tecnológicos de alto rendimiento.',
         'status' => 'Disponible para nuevos desafíos',
         'stats_label' => 'Años en TI & Desarrollo de Software',
         'stats_years' => '17+',

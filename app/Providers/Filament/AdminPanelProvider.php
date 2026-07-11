@@ -26,8 +26,12 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('amrTechAdmin')
             ->login()
+            ->renderHook(
+                'panels::auth.login.form.after',
+                fn (): string => view('filament.google-login-button')->render(),
+            )
             ->colors([
                 'primary' => Color::Amber,
             ])

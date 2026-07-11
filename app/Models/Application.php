@@ -16,6 +16,10 @@ class Application extends Model
         'score',
         'link',
         'notes',
+        'fit_score',
+        'cv_path',
+        'cover_path',
+        'evaluation_notes',
         'interview_date_unix',
         'offer_date_unix',
     ];
@@ -23,6 +27,16 @@ class Application extends Model
     protected $casts = [
         'application_date' => 'date',
     ];
+
+    public function cvUrl(): ?string
+    {
+        return $this->cv_path ? '/download-doc?type=cv&name=' . $this->cv_path : null;
+    }
+
+    public function coverUrl(): ?string
+    {
+        return $this->cover_path ? '/download-doc?type=cover&name=' . $this->cover_path : null;
+    }
 
     public function evaluation(): BelongsTo
     {

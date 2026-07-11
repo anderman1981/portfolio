@@ -4,7 +4,7 @@ return [
     'hero' => [
         'title' => 'AI Solutions Architect',
         'subtitle' => '& Tech Lead',
-        'description' => 'Tech Lead & Full Stack Developer with 17+ years in IT and software development. Expert in backend architectures (Node.js, Python, PHP, Laravel), AI automation (Gemini/OpenAI, NLP), and leading technology teams to deliver scalable solutions.',
+        'description' => 'Tech Lead & Full Stack Developer with 17+ years transforming businesses through backend architecture, AI automation, systems integration, and high-performance technology team leadership.',
         'status' => 'Available for new challenges',
         'stats_label' => 'Years in IT & Software Development',
         'stats_years' => '17+',

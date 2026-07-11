@@ -3,6 +3,20 @@
 .env
 .env.backup
 .env.production
+# Generated outputs / local tools
+/cover_letters/
+/cv/
+/deploy/
+/documents/
+/job_scraper/
+/job-tools/
+job_search_tracker.csv
+# Claude Code session data (private)
+/.claude/
+# Deploy artifacts
+deploy-build.sh
+DEPLOY-HOSTINGER.md
+AGENTS-MANUAL.html
 .phpactor.json
 .phpunit.result.cache
 /.codex

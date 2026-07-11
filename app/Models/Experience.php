@@ -25,4 +25,27 @@ class Experience extends Model
         return LogOptions::defaults()
             ->logFillable();
     }
+
+    /** Format an ISO date (YYYY-MM-DD) into a localized "Mon YYYY" label. */
+    protected function labelFor(?string $date): ?string
+    {
+        if (!$date) {
+            return null;
+        }
+        try {
+            return ucfirst(\Carbon\Carbon::parse($date)->locale(app()->getLocale())->isoFormat('MMM YYYY'));
+        } catch (\Throwable $e) {
+            return $date;
+        }
+    }
+
+    public function getStartLabelAttribute(): ?string
+    {
+        return $this->labelFor($this->start_date);
+    }
+
+    public function getEndLabelAttribute(): ?string
+    {
+        return $this->labelFor($this->end_date);
+    }
 }

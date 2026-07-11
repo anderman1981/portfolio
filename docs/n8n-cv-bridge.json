@@ -1,0 +1,53 @@
+{
+  "name": "CV Chatbot → Slack #cv Bridge",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cv-chat",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-in",
+      "name": "Webhook (from CV chatbot)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [260, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Build the Slack message from the chatbot payload.\nconst p = $json.body || $json;\nconst intent = (p.intent || 'review').toUpperCase();\nconst emoji = intent === 'CV' ? ':briefcase:' : ':grey_question:';\nconst lines = [\n  `${emoji} *Nuevo mensaje del chatbot* — intent: *${intent}*`,\n  p.user_name ? `*Nombre:* ${p.user_name}` : null,\n  p.user_email ? `*Email:* ${p.user_email}` : null,\n  `*Mensaje:* ${p.message}`,\n  p.page_url ? `*Página:* ${p.page_url}` : null,\n  `\\n_Responde en un *hilo* a este mensaje para contestarle al visitante._`,\n  `\\`conversation_id: ${p.conversation_id || 'n/a'}\\``\n].filter(Boolean);\nreturn [{ json: { text: lines.join('\\n'), conversation_id: p.conversation_id } }];"
+      },
+      "id": "format-slack",
+      "name": "Format for Slack",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SLACK_WEBHOOK_CV }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"text\": {{ JSON.stringify($json.text) }} }",
+        "options": {}
+      },
+      "id": "slack-post",
+      "name": "Post to Slack #cv",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [740, 300]
+    }
+  ],
+  "connections": {
+    "Webhook (from CV chatbot)": {
+      "main": [[{ "node": "Format for Slack", "type": "main", "index": 0 }]]
+    },
+    "Format for Slack": {
+      "main": [[{ "node": "Post to Slack #cv", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {},
+  "active": false
+}

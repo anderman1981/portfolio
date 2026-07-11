@@ -8,7 +8,7 @@
 
                 {{-- Logo --}}
                 <a href="#about" class="flex items-center space-x-2 group">
-                    <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-sm shadow-md shadow-blue-200 group-hover:bg-blue-700 transition-colors">AM</div>
+                    <img src="{{ asset('images/AndersonMR.jpg') }}" alt="Anderson Martinez" width="36" height="36" class="w-9 h-9 rounded-xl object-cover shadow-md shadow-blue-200" loading="lazy">
                     <span class="font-bold text-base tracking-tight hidden sm:block">Anderson Martinez</span>
                 </a>
 
@@ -136,7 +136,7 @@
                 <div class="lg:col-span-2 flex flex-col items-center gap-6">
                     <div class="relative w-full max-w-sm mx-auto">
                         <div class="aspect-square rounded-3xl bg-gradient-to-br from-blue-100 via-slate-100 to-emerald-100 border border-slate-200/80 shadow-2xl flex items-center justify-center overflow-hidden">
-                            <span class="text-8xl font-black text-slate-300/70 select-none tracking-tighter">AM</span>
+                            <img src="{{ asset('images/AndersonMR.jpg') }}" alt="Anderson Martinez" width="400" height="400" class="w-full h-full object-cover">
                         </div>
                         {{-- Floating stat --}}
                         <div class="absolute -bottom-5 -left-4 bg-white border border-slate-200 rounded-2xl shadow-xl px-5 py-4 text-center">
@@ -181,7 +181,7 @@
                         {{-- Date / company sidebar --}}
                         <div class="md:w-[220px] md:pr-8 mb-3 md:mb-0 md:text-right flex-shrink-0">
                             <div class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-1">
-                                {{ $exp->start_date }} — {{ $exp->end_date ?? __('portfolio.hero.present') }}
+                                {{ $exp->start_label }} — {{ $exp->is_current ? __('portfolio.hero.present') : ($exp->end_label ?? __('portfolio.hero.present')) }}
                             </div>
                             <div class="font-bold text-slate-900 text-sm leading-snug">{{ $exp->company }}</div>
                             <div class="text-slate-400 text-xs mt-0.5 italic">{{ $exp->location }}</div>

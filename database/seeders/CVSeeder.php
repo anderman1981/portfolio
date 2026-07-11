@@ -39,29 +39,6 @@ class CVSeeder extends Seeder
         ]);
 
         Experience::create([
-            'company'    => 'GSD CONSULTING',
-            'role'       => ['es' => 'Consultor Técnico de TI & Desarrollador de IA', 'en' => 'IT Technical Consultant & AI Developer'],
-            'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
-            'start_date' => 'Septiembre 2025',
-            'end_date'   => 'Febrero 2026',
-            'is_current' => false,
-            'achievements' => [
-                'es' => [
-                    'Liderazgo y Desarrollo: Desarrollador principal del área y líder del proyecto, con coordinación directa de una persona de soporte técnico de TI.',
-                    'Arquitectura de Software (ATS con IA): Diseñé el portal interno y el sistema de reclutamiento (ATS) automatizado que realiza scraping de hojas de vida y evalúa candidatos mediante análisis de sentimiento y nivel de inglés desde grabaciones de video.',
-                    'Automatización de Flujos: Desarrollé un bot interactivo en Slack para guiar paso a paso el proceso de onboarding de nuevos empleados.',
-                    'Sincronización de Sistemas: Conecté Time Doctor con Slack para automatizar notificaciones de ingresos de personal y estructuré un panel web para unificar el monitoreo de múltiples plataformas.',
-                ],
-                'en' => [
-                    'Leadership & Development: Lead developer and project leader, directly coordinating one IT technical support staff member.',
-                    'Software Architecture (AI-powered ATS): Designed the internal portal and automated recruitment system (ATS) that scrapes resume data and evaluates candidates via sentiment analysis and English proficiency from video recordings.',
-                    'Workflow Automation: Developed an interactive Slack bot to guide new employees step-by-step through the onboarding process.',
-                    'Systems Synchronization: Connected Time Doctor with Slack to automate staff login notifications and built a web panel to unify monitoring across multiple platforms.',
-                ],
-            ],
-        ]);
-
-        Experience::create([
             'company'    => 'ALCOCK AND ASSOCIATES',
             'role'       => ['es' => 'Senior Full Stack Developer & IT Lead', 'en' => 'Senior Full Stack Developer & IT Lead'],
             'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
@@ -216,6 +193,11 @@ class CVSeeder extends Seeder
             ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'NLP / Visión Computacional',        'name_en' => 'NLP / Computer Vision',             'p' => 80],
             ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Zapier / Make.com',                 'name_en' => 'Zapier / Make.com',                 'p' => 85],
             ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Bots de Slack',                     'name_en' => 'Slack Bots',                        'p' => 85],
+            // Skills adicionales sincronizadas con proyectos reales
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'TypeScript',                        'name_en' => 'TypeScript',                        'p' => 85],
+            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'PostgreSQL',                        'name_en' => 'PostgreSQL',                        'p' => 80],
+            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Web Scraping / Cheerio',            'name_en' => 'Web Scraping / Cheerio',            'p' => 80],
+            ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'Integración de APIs Externas',      'name_en' => 'External API Integration',          'p' => 90],
         ];
 
         foreach ($skills as $s) {
@@ -259,10 +241,10 @@ class CVSeeder extends Seeder
         ]);
 
         Project::create([
-            'title'        => ['es' => 'ATS Automatizado con IA (GSD Consulting)', 'en' => 'AI-Powered ATS (GSD Consulting)'],
+            'title'        => ['es' => 'ATS con Inteligencia Artificial', 'en' => 'AI-Powered ATS'],
             'description'  => [
-                'es' => 'Sistema de reclutamiento (ATS) que automatiza el scraping de hojas de vida y evalúa candidatos mediante análisis de sentimiento y nivel de inglés desde grabaciones de video.',
-                'en' => 'Recruitment system (ATS) that automates resume scraping and evaluates candidates via sentiment analysis and English proficiency from video recordings.',
+                'es' => 'Sistema de reclutamiento automatizado que extrae datos de hojas de vida y evalúa candidatos mediante análisis de sentimiento y nivel de inglés desde grabaciones de video.',
+                'en' => 'Automated recruitment system that scrapes resume data and evaluates candidates via sentiment analysis and English proficiency from video recordings.',
             ],
             'technologies' => ['Python', 'NLP', 'OpenAI', 'Node.js', 'REST API'],
             'url'          => null,
@@ -285,6 +267,16 @@ class CVSeeder extends Seeder
                 'en' => 'Integration of telephony infrastructure with Abacus Law legal software via REST APIs to centralize operational data logging, plus automated backup system for secure migration from legacy systems.',
             ],
             'technologies' => ['REST API', 'PHP', 'Zapier', 'Make.com', 'Abacus Law'],
+            'url'          => null,
+        ]);
+
+        Project::create([
+            'title'        => ['es' => 'Sistema de Monitoreo Rama Judicial', 'en' => 'Judicial Branch Monitoring System'],
+            'description'  => [
+                'es' => 'Plataforma dockerizada que vigila y realiza scraping automatizado del portal de la Rama Judicial colombiana, con procesamiento de datos asistido por IA y generación de reportes estructurados en hojas de cálculo.',
+                'en' => 'Dockerized platform that monitors and automatically scrapes the Colombian Judicial Branch portal, with AI-assisted data processing and structured spreadsheet report generation.',
+            ],
+            'technologies' => ['Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'Gemini AI', 'Cheerio', 'SheetJS'],
             'url'          => null,
         ]);
     }

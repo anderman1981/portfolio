@@ -7,7 +7,7 @@
                     <h2 class="text-4xl font-bold text-gray-900 mb-2">🧳 Job Applications</h2>
                     <p class="text-gray-600 text-lg">Track your career journey</p>
                 </div>
-                <a href="/admin/job-portals" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                <a href="/amrTechAdmin/job-portals" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                     🌐 Browse Job Portals
                 </a>
             </div>
@@ -148,7 +148,7 @@
             <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-8 text-white shadow-lg">
                 <h3 class="text-2xl font-bold mb-2">Looking for new opportunities?</h3>
                 <p class="text-blue-100 mb-6">Explore 34 curated job portals to find your next career move.</p>
-                <a href="/admin/job-portals" class="inline-block bg-white text-blue-600 font-bold px-6 py-2 rounded-lg hover:bg-blue-50 transition">
+                <a href="/amrTechAdmin/job-portals" class="inline-block bg-white text-blue-600 font-bold px-6 py-2 rounded-lg hover:bg-blue-50 transition">
                     Discover Job Portals →
                 </a>
             </div>

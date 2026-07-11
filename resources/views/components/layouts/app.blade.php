@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @include('partials.analytics')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'CV Portfolio' }}</title>
+    <title>{{ $title ?? 'Anderson Martínez | AI Solutions Architect & Tech Lead' }}</title>
+    <meta name="description" content="Tech Lead & Full Stack Developer con 17+ años. Arquitecturas backend, automatización con IA, integración de sistemas y liderazgo técnico.">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Anderson Martínez | AI Solutions Architect & Tech Lead">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/AndersonMR.jpg') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -39,6 +48,5 @@
     </footer>
 
     @livewireScripts
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>

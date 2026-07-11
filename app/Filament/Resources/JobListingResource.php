@@ -66,6 +66,8 @@ class JobListingResource extends Resource
                 TextColumn::make('location')->limit(20)->placeholder('—'),
                 TextColumn::make('published_at')->date()->sortable(),
                 IconColumn::make('is_applied')->label('Applied')->boolean(),
+                IconColumn::make('apply_queued')->label('Queued')->boolean()
+                    ->trueIcon(Heroicon::QueueList)->falseIcon(Heroicon::Minus),
             ])
             ->filters([
                 SelectFilter::make('source')->options([
@@ -77,6 +79,7 @@ class JobListingResource extends Resource
                 ]),
                 TernaryFilter::make('is_favorite')->label('Favorites'),
                 TernaryFilter::make('is_applied')->label('Applied'),
+                TernaryFilter::make('apply_queued')->label('Queued for /apply'),
                 TernaryFilter::make('is_dismissed')->label('Dismissed')->default(false),
             ])
             ->recordActions([
@@ -84,6 +87,35 @@ class JobListingResource extends Resource
                     ->label('Open')
                     ->icon(Heroicon::ArrowTopRightOnSquare)
                     ->url(fn (JobListing $record) => $record->url, shouldOpenInNewTab: true),
+                // A. Apply with AI (Gemini) — generates evaluation + CV + cover, saves to Job Applications
+                Action::make('applyAi')
+                    ->label('Apply with AI')
+                    ->icon(Heroicon::Sparkles)
+                    ->color('primary')
+                    ->requiresConfirmation()
+                    ->modalHeading('Generate application with AI')
+                    ->modalDescription('Gemini will evaluate the fit and draft a tailored CV and cover letter, then save them to Job Applications.')
+                    ->action(function (JobListing $record) {
+                        try {
+                            $app = app(\App\Services\GeminiApplyService::class)->apply($record);
+                            $record->update(['is_applied' => true, 'apply_queued' => false]);
+                            \Filament\Notifications\Notification::make()
+                                ->title('Application generated')
+                                ->body("Fit {$app->fit_score}/100 · CV + cover saved. See Job Applications.")
+                                ->success()->send();
+                        } catch (\Throwable $e) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('AI apply failed')
+                                ->body($e->getMessage())
+                                ->danger()->persistent()->send();
+                        }
+                    }),
+                // B. Queue for /apply — flag it, then run /apply in the terminal with Claude Code
+                Action::make('queueApply')
+                    ->label(fn (JobListing $r) => $r->apply_queued ? 'Queued ✓' : 'Queue for /apply')
+                    ->icon(Heroicon::QueueList)
+                    ->color('gray')
+                    ->action(fn (JobListing $record) => $record->update(['apply_queued' => !$record->apply_queued])),
                 Action::make('applied')
                     ->label('Mark Applied')
                     ->icon(Heroicon::CheckCircle)

@@ -37,11 +37,33 @@ return [
 
     'gemini' => [
         'key' => env('GEMINI_API_KEY'),
+        // Multi-key failover (primary first). Add more slots as needed.
+        'keys' => array_filter([
+            env('GEMINI_API_KEY'),
+            env('GEMINI_API_KEY_2'),
+            env('GEMINI_API_KEY_3'),
+            env('GEMINI_API_KEY_4'),
+        ]),
     ],
 
     'github' => [
         'token' => env('GITHUB_TOKEN'),
         'username' => env('GITHUB_USERNAME', 'anderman1981'),
+    ],
+
+    'cv_bridge' => [
+        'webhook' => env('CV_BRIDGE_WEBHOOK'),      // n8n webhook URL (ida)
+        'token' => env('CV_BRIDGE_TOKEN'),          // secreto compartido para el reply-intake (vuelta)
+        'channel' => env('SLACK_CHANNEL_CV', 'cv'), // etiqueta de canal
+        'slack_webhook' => env('SLACK_WEBHOOK_CV'), // fallback directo a Slack si no hay n8n
+        'whatsapp_webhook' => env('OPENCLAW_WHATSAPP_WEBHOOK'), // endpoint OpenClaw para WhatsApp
+        'admin_whatsapp' => env('ADMIN_WHATSAPP'), // número de Anderson
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
 
 ];

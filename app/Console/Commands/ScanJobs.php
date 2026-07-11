@@ -38,6 +38,9 @@ class ScanJobs extends Command
         $this->info("Scan complete. {$found} matching listings saved/updated.");
         $this->line('Total in database: ' . JobListing::count());
 
+        // Keep the Claude Code /rank + /apply workflow in sync
+        $this->call('jobs:export');
+
         return self::SUCCESS;
     }
 

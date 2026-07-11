@@ -20,6 +20,16 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
+        // Allow the whitelisted admin emails (same list Google login uses),
+        // falling back to the internal @anderson.com domain.
+        $allowed = collect(explode(',', (string) env('ADMIN_ALLOWED_EMAILS', '')))
+            ->map(fn ($e) => trim(strtolower($e)))
+            ->filter();
+
+        if ($allowed->isNotEmpty() && $allowed->contains(strtolower($this->email))) {
+            return true;
+        }
+
         return str_ends_with($this->email, '@anderson.com');
     }
 
