@@ -1,3 +1,6 @@
+# Force PHP 8.4 on Hostinger LiteSpeed (do not remove — required for Laravel 13)
+AddHandler application/x-httpd-alt-php84___lsphp .php
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
