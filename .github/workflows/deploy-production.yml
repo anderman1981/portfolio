@@ -13,12 +13,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup SSH
+      - name: Setup SSH key & config
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p ${{ secrets.HOSTINGER_PORT }} ${{ secrets.HOSTINGER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+          # Write ssh config: persistent ControlMaster so all steps share one TCP connection
+          cat >> ~/.ssh/config <<EOF
+          Host hostinger-cv
+            HostName ${{ secrets.HOSTINGER_HOST }}
+            Port ${{ secrets.HOSTINGER_PORT }}
+            User ${{ secrets.HOSTINGER_USER }}
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking no
+            ControlMaster auto
+            ControlPath ~/.ssh/ctrl-%C
+            ControlPersist 60s
+          EOF
+          # Open the master connection
+          ssh -fNT hostinger-cv
 
       - name: Sync files via rsync
         run: |
@@ -33,21 +46,20 @@ jobs:
             --exclude='storage/framework/views' \
             --exclude='storage/app/public/chat-uploads' \
             --exclude='database/database.sqlite' \
-            -e "ssh -p ${{ secrets.HOSTINGER_PORT }} -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            -e "ssh -o ControlPath=~/.ssh/ctrl-%C" \
             ./ \
-            ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_DEPLOY_PATH }}/
+            hostinger-cv:${{ secrets.HOSTINGER_DEPLOY_PATH }}/
 
-      - name: Post-deploy commands
+      - name: Post-deploy artisan commands
         run: |
-          ssh -p ${{ secrets.HOSTINGER_PORT }} -i ~/.ssh/deploy_key \
-              -o StrictHostKeyChecking=no \
-              ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} \
-              "cd ${{ secrets.HOSTINGER_DEPLOY_PATH }} && \
-               php artisan config:clear && \
-               php artisan view:clear && \
-               php artisan route:clear && \
-               php artisan optimize && \
-               echo '✅ Production deploy OK'"
+          ssh hostinger-cv "
+            cd ${{ secrets.HOSTINGER_DEPLOY_PATH }}
+            php artisan config:clear
+            php artisan view:clear
+            php artisan route:clear
+            php artisan optimize
+            echo '✅ Production deploy OK'
+          "
 
       - name: Smoke test
         run: |
