@@ -10,6 +10,7 @@ use App\Models\Skill;
 use App\Services\ChatBridgeService;
 use App\Services\GeminiService;
 use App\Services\LocalResponder;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -130,6 +131,14 @@ class AIChat extends Component
      */
     public function startChat()
     {
+        // 5 new leads per IP per hour prevents Slack flooding
+        $ipKey = 'start_chat:' . request()->ip();
+        if (RateLimiter::tooManyAttempts($ipKey, 5)) {
+            $this->addError('email', 'Too many attempts. Please try again later.');
+            return;
+        }
+        RateLimiter::hit($ipKey, 3600);
+
         $rules = [
             'name' => 'required|string|min:2|max:80',
             'email' => 'required|email|max:120',
@@ -272,6 +281,20 @@ class AIChat extends Component
         $this->validate([
             'question' => 'required|string|min:3|max:500',
         ]);
+
+        // 20 messages per session per minute to prevent Gemini API abuse
+        $key = 'chat:' . Session::getId();
+        if (RateLimiter::tooManyAttempts($key, 20)) {
+            $wait = RateLimiter::availableIn($key);
+            $this->messages[] = ['role' => 'assistant', 'content' =>
+                app()->getLocale() === 'es'
+                    ? "⏳ Estás enviando mensajes muy rápido. Espera {$wait}s antes de continuar."
+                    : "⏳ You're sending messages too fast. Wait {$wait}s before continuing."
+            ];
+            $this->question = '';
+            return;
+        }
+        RateLimiter::hit($key, 60);
 
         $userQuestion = $this->question;
         $this->messages[] = ['role' => 'user', 'content' => $userQuestion];

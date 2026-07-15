@@ -15,9 +15,9 @@ class ChatReplyController extends Controller
 {
     public function store(Request $request): JsonResponse
     {
-        // Shared-secret auth (set CV_BRIDGE_TOKEN in .env and in n8n).
+        // Shared-secret auth — fail-closed: reject if token not configured or doesn't match.
         $expected = config('services.cv_bridge.token');
-        if ($expected && $request->header('X-Bridge-Token') !== $expected) {
+        if (! $expected || $request->header('X-Bridge-Token') !== $expected) {
             return response()->json(['ok' => false, 'error' => 'Unauthorized'], 401);
         }
 
