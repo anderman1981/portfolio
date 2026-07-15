@@ -66,4 +66,13 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
 
+    'admin' => [
+        // Comma-separated emails allowed into Filament (via Google OAuth or direct login).
+        // Must be in config (not env()) to survive config:cache in production.
+        'allowed_emails' => array_filter(array_map(
+            'trim',
+            explode(',', env('ADMIN_ALLOWED_EMAILS', ''))
+        )),
+    ],
+
 ];

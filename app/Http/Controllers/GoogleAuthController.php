@@ -22,10 +22,9 @@ class GoogleAuthController extends Controller
             return redirect('/amrTechAdmin/login')->withErrors(['email' => 'No se pudo autenticar con Google.']);
         }
 
-        // Only allow whitelisted emails into the admin.
-        $allowed = collect(explode(',', (string) env('ADMIN_ALLOWED_EMAILS', '')))
-            ->map(fn ($e) => trim(strtolower($e)))
-            ->filter();
+        // Uses config() — safe after config:cache. env() would return null in production.
+        $allowed = collect(config('services.admin.allowed_emails', []))
+            ->map(fn ($e) => strtolower($e));
 
         if ($allowed->isNotEmpty() && ! $allowed->contains(strtolower($googleUser->getEmail()))) {
             abort(403, 'Este correo no está autorizado para el panel.');
