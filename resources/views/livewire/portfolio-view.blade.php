@@ -18,6 +18,7 @@
                         ['href' => '#experience', 'label' => __('portfolio.nav.experience')],
                         ['href' => '#skills',     'label' => __('portfolio.nav.skills')],
                         ['href' => '#projects',   'label' => __('portfolio.nav.projects')],
+                        ['href' => '#portfolio',  'label' => 'Portfolio'],
                         ['href' => '#education',  'label' => __('portfolio.nav.education')],
                         ['href' => '#about',      'label' => __('portfolio.nav.contact')],
                     ] as $link)
@@ -57,6 +58,7 @@
                 ['href' => '#experience', 'label' => __('portfolio.nav.experience')],
                 ['href' => '#skills',     'label' => __('portfolio.nav.skills')],
                 ['href' => '#projects',   'label' => __('portfolio.nav.projects')],
+                ['href' => '#portfolio',  'label' => 'Portfolio'],
                 ['href' => '#education',  'label' => __('portfolio.nav.education')],
                 ['href' => '#about',      'label' => __('portfolio.nav.contact')],
             ] as $link)
@@ -331,6 +333,164 @@
                 </div>
                 @endforeach
             </div>
+        </div>
+    </section>
+
+    {{-- ─── LIVE PORTFOLIO ─────────────────────────────────────────────────────── --}}
+    <section id="portfolio" class="py-24 bg-gradient-to-b from-slate-900 to-[#0d1117]">
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="mb-14">
+                <p class="text-emerald-400 font-semibold text-sm uppercase tracking-widest mb-2">Portfolio en Vivo</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Proyectos Reales</h2>
+                <p class="text-slate-400 text-base max-w-2xl leading-relaxed">Sistemas, aplicaciones y herramientas construidas y desplegadas — desde producción activa hasta propuestas y demos funcionales.</p>
+                <div class="w-16 h-1 bg-emerald-500 rounded-full mt-4"></div>
+            </div>
+
+            @php
+            $liveProjects = [
+                [
+                    'title'       => 'Resúmenes de Negocios IA',
+                    'description' => 'App web IA para generar resúmenes ejecutivos de libros de negocios. Conectada a Claude API con interfaz moderna en React.',
+                    'url'         => 'https://resumenes-negocios.vercel.app/',
+                    'tags'        => ['React', 'Claude API', 'Vercel', 'IA'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'AndersonMares AI',
+                    'description' => 'Portal de herramientas IA y presentación de servicios tech. Landing con asistentes inteligentes integrados.',
+                    'url'         => 'https://andersonmares.xyz/indexai.html',
+                    'tags'        => ['HTML', 'JavaScript', 'IA'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'Portfolio v2',
+                    'description' => 'Segunda versión del sitio personal con diseño moderno, animaciones y secciones de servicios.',
+                    'url'         => 'https://andersonmares.xyz/index2.php',
+                    'tags'        => ['PHP', 'CSS', 'JavaScript'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'VossAI Admin',
+                    'description' => 'Panel de administración para sistema con IA integrada. Módulos de usuarios, reportes y configuración avanzada.',
+                    'url'         => 'https://andersonmares.xyz/vossai/admin/',
+                    'tags'        => ['Laravel', 'Filament', 'IA', 'MySQL'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'VitalVida — Propuesta UI',
+                    'description' => 'Propuesta de plataforma de bienestar y vida saludable. No se concretó por presupuesto del cliente, pero el diseño quedó completo.',
+                    'url'         => 'https://andersonmares.xyz/vitalvida/vitalvida.html',
+                    'tags'        => ['HTML/CSS', 'JavaScript', 'UI Design'],
+                    'status'      => 'proposal',
+                ],
+                [
+                    'title'       => 'Vault — Gestor Seguro',
+                    'description' => 'Aplicación de bóveda para gestión segura de información privada y credenciales con encriptación.',
+                    'url'         => 'https://andersonmares.xyz/vault/',
+                    'tags'        => ['PHP', 'Encriptación', 'Seguridad'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'Recuerdos — Cumpleaños ❤️',
+                    'description' => 'Sistema web para guardar y compartir recuerdos de momentos especiales. Construido para el cumpleaños de mi hija.',
+                    'url'         => 'https://andersonmares.xyz/v2/index.html',
+                    'tags'        => ['HTML/CSS', 'JavaScript', 'LocalStorage'],
+                    'status'      => 'personal',
+                ],
+                [
+                    'title'       => 'Studio — Generador Landing Pages',
+                    'description' => 'Herramienta gratuita para crear landing pages HTML con IA. El usuario genera el código y se lo lleva — el footer lleva mi firma.',
+                    'url'         => 'https://studio.andersonmares.xyz/',
+                    'tags'        => ['Laravel', 'Claude API', 'IA Generativa'],
+                    'status'      => 'live',
+                ],
+                [
+                    'title'       => 'Portal WS Admin',
+                    'description' => 'Sistema de administración de clientes con módulos de reportes, seguimiento y gestión de usuarios.',
+                    'url'         => 'https://andersonmares.xyz/ws/public/admin/login.php',
+                    'tags'        => ['PHP', 'Laravel', 'Bootstrap'],
+                    'status'      => 'live',
+                ],
+            ];
+
+            $statusConfig = [
+                'live'     => ['pill' => 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40', 'dot' => 'bg-emerald-400 animate-pulse', 'label' => 'En Vivo'],
+                'proposal' => ['pill' => 'bg-amber-500/20 text-amber-400 border-amber-500/40',   'dot' => 'bg-amber-400',               'label' => 'Propuesta'],
+                'personal' => ['pill' => 'bg-violet-500/20 text-violet-400 border-violet-500/40', 'dot' => 'bg-violet-400',             'label' => 'Personal'],
+            ];
+            @endphp
+
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-7">
+                @foreach($liveProjects as $lp)
+                @php $sc = $statusConfig[$lp['status']] ?? $statusConfig['live']; @endphp
+
+                <div class="group flex flex-col rounded-2xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 bg-slate-800/40 hover:bg-slate-800/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50"
+                     x-data="{ iframeLoaded: false }">
+
+                    {{-- Browser chrome --}}
+                    <div class="bg-[#1a1f2e] border-b border-slate-700/60 flex-shrink-0">
+                        <div class="flex items-center gap-1.5 px-4 py-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500/70 flex-shrink-0"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/70 flex-shrink-0"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500/70 flex-shrink-0"></span>
+                            <div class="flex-1 mx-2 bg-slate-700/50 rounded px-2.5 py-0.5 text-[10px] text-slate-500 truncate font-mono leading-5">
+                                {{ $lp['url'] }}
+                            </div>
+                            <svg class="w-3 h-3 text-slate-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        </div>
+                    </div>
+
+                    {{-- Preview area --}}
+                    <div class="relative flex-shrink-0 overflow-hidden" style="height: 210px; background: #0a0e1a;">
+
+                        {{-- Loading shimmer --}}
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-800/0 via-slate-700/30 to-slate-800/0 animate-pulse"
+                             x-show="!iframeLoaded" x-cloak></div>
+
+                        {{-- Iframe scaled to fit --}}
+                        <div class="absolute inset-0" style="overflow: hidden;">
+                            <iframe
+                                src="{{ $lp['url'] }}"
+                                style="width: 1280px; height: 680px; transform: scale(0.305); transform-origin: 0 0; border: none; pointer-events: none; display: block;"
+                                loading="lazy"
+                                scrolling="no"
+                                sandbox="allow-scripts allow-same-origin allow-forms"
+                                @load="iframeLoaded = true"
+                            ></iframe>
+                        </div>
+
+                        {{-- Hover overlay --}}
+                        <a href="{{ $lp['url'] }}" target="_blank" rel="noopener"
+                           class="absolute inset-0 flex items-end justify-end p-3 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer">
+                            <span class="flex items-center gap-1.5 bg-white text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-xl">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                Abrir sitio
+                            </span>
+                        </a>
+                    </div>
+
+                    {{-- Card info --}}
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-start justify-between gap-3 mb-2">
+                            <h3 class="font-bold text-white text-sm leading-snug">{{ $lp['title'] }}</h3>
+                            <span class="flex-shrink-0 inline-flex items-center gap-1 border text-[10px] font-bold px-2 py-0.5 rounded-full {{ $sc['pill'] }}">
+                                <span class="w-1.5 h-1.5 rounded-full {{ $sc['dot'] }}"></span>
+                                {{ $sc['label'] }}
+                            </span>
+                        </div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">{{ $lp['description'] }}</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            @foreach($lp['tags'] as $tag)
+                            <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-700/60 text-slate-300 rounded uppercase tracking-wider border border-slate-600/40">{{ $tag }}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <p class="text-center text-slate-600 text-xs mt-10 italic">Más proyectos próximamente — portafolio en construcción continua</p>
         </div>
     </section>
 
