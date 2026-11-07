@@ -72,7 +72,7 @@ return [
 
     // Salary: any annual-looking figure >= threshold (USD-ish) scores full points.
     'salary' => [
-        'annual_threshold' => 30000,
+        'annual_threshold' => 48000, // candidate floor: USD 4,000/month
         'points' => ['good' => 10, 'unknown' => 5, 'low' => 2],
     ],
 
