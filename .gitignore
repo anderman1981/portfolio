@@ -43,3 +43,6 @@ Thumbs.db
 # Local-only: design-hook cache and private CV audit reports
 /.impeccable/hook.cache.json
 /docs/auditoria-*.html
+
+# Impeccable working directory
+.impeccable/
