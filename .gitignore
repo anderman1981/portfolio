@@ -39,3 +39,7 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Local-only: design-hook cache and private CV audit reports
+/.impeccable/hook.cache.json
+/docs/auditoria-*.html
