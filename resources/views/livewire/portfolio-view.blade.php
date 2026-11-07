@@ -16,10 +16,11 @@
                 <div class="hidden lg:flex items-center space-x-1 text-sm font-medium text-slate-600">
                     @foreach([
                         ['href' => '#experience', 'label' => __('portfolio.nav.experience')],
+                        ['href' => '#cases',      'label' => __('portfolio.sections.cases_label')],
                         ['href' => '#skills',     'label' => __('portfolio.nav.skills')],
                         ['href' => '#projects',   'label' => __('portfolio.nav.projects')],
                         ['href' => '#education',  'label' => __('portfolio.nav.education')],
-                        ['href' => '#about',      'label' => __('portfolio.nav.contact')],
+                        ['href' => '#contact',    'label' => __('portfolio.nav.contact')],
                     ] as $link)
                     <a href="{{ $link['href'] }}" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-blue-600 transition-all">{{ $link['label'] }}</a>
                     @endforeach
@@ -55,10 +56,11 @@
              class="lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md px-4 py-3 space-y-1" x-cloak>
             @foreach([
                 ['href' => '#experience', 'label' => __('portfolio.nav.experience')],
+                ['href' => '#cases',      'label' => __('portfolio.sections.cases_label')],
                 ['href' => '#skills',     'label' => __('portfolio.nav.skills')],
                 ['href' => '#projects',   'label' => __('portfolio.nav.projects')],
                 ['href' => '#education',  'label' => __('portfolio.nav.education')],
-                ['href' => '#about',      'label' => __('portfolio.nav.contact')],
+                ['href' => '#contact',    'label' => __('portfolio.nav.contact')],
             ] as $link)
             <a href="{{ $link['href'] }}" @click="mobileMenu = false" class="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600 rounded-lg transition-colors">{{ $link['label'] }}</a>
             @endforeach
@@ -93,6 +95,7 @@
                             {{ __('portfolio.hero.title') }}<br>
                             <span class="gradient-text">{{ __('portfolio.hero.subtitle') }}</span>
                         </h1>
+                        <p class="text-slate-500 text-sm mt-3 font-medium">AI Solutions Architect · Full Stack Developer · Tech Lead</p>
                     </div>
 
                     <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
@@ -125,8 +128,8 @@
                             <svg class="w-4 h-4 text-[#0077B5]" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             LinkedIn
                         </a>
-                        <a href="#experience" class="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 px-4 py-3 font-medium text-sm transition-colors">
-                            Ver experiencia
+                        <a href="#problems" class="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 px-4 py-3 font-medium text-sm transition-colors">
+                            Cómo puedo ayudarte
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </a>
                     </div>
@@ -154,6 +157,67 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {{-- ─── PROBLEMAS QUE RESUELVO ────────────────────────────────────────────── --}}
+    <section id="problems" class="py-20 bg-white border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="text-center mb-14">
+                <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-2">{{ __('portfolio.sections.problems_label') }}</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">{{ __('portfolio.sections.problems') }}</h2>
+                <p class="text-slate-500 max-w-xl mx-auto text-base">{{ __('portfolio.sections.problems_subtitle') }}</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                {{-- Card 1: Automatización --}}
+                <div class="group relative bg-blue-50 border border-blue-100 rounded-2xl p-8 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base mb-3 leading-snug">{{ __('portfolio.problems.card1_title') }}</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-5">{{ __('portfolio.problems.card1_desc') }}</p>
+                    <span class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        {{ __('portfolio.problems.card1_result') }}
+                    </span>
+                </div>
+
+                {{-- Card 2: Integraciones --}}
+                <div class="group relative bg-violet-50 border border-violet-100 rounded-2xl p-8 hover:border-violet-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-violet-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base mb-3 leading-snug">{{ __('portfolio.problems.card2_title') }}</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-5">{{ __('portfolio.problems.card2_desc') }}</p>
+                    <span class="inline-flex items-center gap-1.5 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        {{ __('portfolio.problems.card2_result') }}
+                    </span>
+                </div>
+
+                {{-- Card 3: Desarrollo a medida --}}
+                <div class="group relative bg-emerald-50 border border-emerald-100 rounded-2xl p-8 hover:border-emerald-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base mb-3 leading-snug">{{ __('portfolio.problems.card3_title') }}</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-5">{{ __('portfolio.problems.card3_desc') }}</p>
+                    <span class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        {{ __('portfolio.problems.card3_result') }}
+                    </span>
                 </div>
 
             </div>
@@ -230,7 +294,7 @@
             <div class="mb-14 text-center">
                 <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-2">{{ __('portfolio.nav.skills') }}</p>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">{{ __('portfolio.sections.skills') }}</h2>
-                <p class="text-slate-500 max-w-xl mx-auto text-base">17 años de experiencia acumulada en tecnologías clave del ecosistema moderno.</p>
+                <p class="text-slate-500 max-w-xl mx-auto text-base">{{ __('portfolio.sections.skills_subtitle') }}</p>
             </div>
 
             @php
@@ -267,13 +331,90 @@
         </div>
     </section>
 
+    {{-- ─── CASOS DE ESTUDIO ───────────────────────────────────────────────────── --}}
+    <section id="cases" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="mb-14">
+                <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-2">{{ __('portfolio.sections.cases_label') }}</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">{{ __('portfolio.sections.cases') }}</h2>
+                <p class="text-slate-500 text-base">{{ __('portfolio.sections.cases_subtitle') }}</p>
+                <div class="w-16 h-1 bg-blue-600 rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                {{-- Case 1: USA Glass --}}
+                <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:border-blue-200 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                        </div>
+                        <span class="text-xs font-black text-blue-600 uppercase tracking-widest">{{ __('portfolio.cases.case1_company') }}</span>
+                    </div>
+                    <p class="text-slate-700 text-base italic leading-relaxed mb-4 font-medium border-l-4 border-blue-200 pl-4">
+                        "{{ __('portfolio.cases.case1_imagine') }}"
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">{{ __('portfolio.cases.case1_result') }}</p>
+                    <span class="self-start bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold px-3 py-1.5 rounded-full">{{ __('portfolio.cases.case1_tag') }}</span>
+                </div>
+
+                {{-- Case 2: INGACOV --}}
+                <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:border-emerald-200 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+                        </div>
+                        <span class="text-xs font-black text-emerald-600 uppercase tracking-widest">{{ __('portfolio.cases.case2_company') }}</span>
+                    </div>
+                    <p class="text-slate-700 text-base italic leading-relaxed mb-4 font-medium border-l-4 border-emerald-200 pl-4">
+                        "{{ __('portfolio.cases.case2_imagine') }}"
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">{{ __('portfolio.cases.case2_result') }}</p>
+                    <span class="self-start bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-full">{{ __('portfolio.cases.case2_tag') }}</span>
+                </div>
+
+                {{-- Case 3: WhatsApp CRM --}}
+                <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:border-violet-200 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <span class="text-xs font-black text-violet-600 uppercase tracking-widest">{{ __('portfolio.cases.case3_company') }}</span>
+                    </div>
+                    <p class="text-slate-700 text-base italic leading-relaxed mb-4 font-medium border-l-4 border-violet-200 pl-4">
+                        "{{ __('portfolio.cases.case3_imagine') }}"
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">{{ __('portfolio.cases.case3_result') }}</p>
+                    <span class="self-start bg-violet-50 text-violet-700 border border-violet-200 text-xs font-bold px-3 py-1.5 rounded-full">{{ __('portfolio.cases.case3_tag') }}</span>
+                </div>
+
+                {{-- Case 4: Incolmotos --}}
+                <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:border-amber-200 hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                        </div>
+                        <span class="text-xs font-black text-amber-600 uppercase tracking-widest">{{ __('portfolio.cases.case4_company') }}</span>
+                    </div>
+                    <p class="text-slate-700 text-base italic leading-relaxed mb-4 font-medium border-l-4 border-amber-200 pl-4">
+                        "{{ __('portfolio.cases.case4_imagine') }}"
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">{{ __('portfolio.cases.case4_result') }}</p>
+                    <span class="self-start bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold px-3 py-1.5 rounded-full">{{ __('portfolio.cases.case4_tag') }}</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     {{-- ─── PROJECTS ───────────────────────────────────────────────────────────── --}}
     <section id="projects" class="py-24 bg-slate-900">
         <div class="max-w-7xl mx-auto px-4">
 
             <div class="mb-14">
                 <p class="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-2">{{ __('portfolio.nav.projects') }}</p>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">{{ __('portfolio.sections.projects') }}</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">{{ __('portfolio.sections.projects') }} <span class="text-slate-400 text-2xl font-bold">—</span></h2>
                 <div class="w-16 h-1 bg-blue-500 rounded-full"></div>
             </div>
 
@@ -393,6 +534,47 @@
         </div>
     </section>
 
+    {{-- ─── CTA CONTACTO ───────────────────────────────────────────────────────── --}}
+    <section id="contact" class="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+
+            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/90 px-4 py-1.5 rounded-full text-sm font-semibold mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                {{ __('portfolio.hero.status') }}
+            </div>
+
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                {{ __('portfolio.cta.title') }}
+            </h2>
+            <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                {{ __('portfolio.cta.subtitle') }}
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:andersonmares81@gmail.com"
+                   class="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 font-bold px-7 py-3.5 rounded-full text-sm transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    {{ __('portfolio.cta.email') }}
+                </a>
+                <a href="https://wa.me/573168265737?text=Hola%20Anderson,%20vi%20tu%20portafolio%20y%20quiero%20hablar%20contigo%20sobre%20un%20proyecto."
+                   target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-7 py-3.5 rounded-full text-sm transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    {{ __('portfolio.cta.whatsapp') }}
+                </a>
+                <a href="https://linkedin.com/in/anderson-martinez-restrepo" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-7 py-3.5 rounded-full text-sm transition-all hover:-translate-y-0.5">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    {{ __('portfolio.cta.linkedin') }}
+                </a>
+            </div>
+
+        </div>
+    </section>
+
     {{-- ─── FOOTER ─────────────────────────────────────────────────────────────── --}}
     <footer class="bg-slate-900 text-slate-400 py-14">
         <div class="max-w-7xl mx-auto px-4">
@@ -400,7 +582,7 @@
 
                 <div>
                     <div class="text-2xl font-black text-white tracking-tight mb-1">ANDERSON<span class="text-blue-500">MARTINEZ</span></div>
-                    <p class="text-sm text-slate-500">Full Stack Developer & AI Solutions Architect</p>
+                    <p class="text-sm text-slate-500">{{ __('portfolio.footer.tagline') }}</p>
                 </div>
 
                 {{-- Social links --}}

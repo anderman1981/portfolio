@@ -20,20 +20,43 @@ class CVSeeder extends Seeder
         // ─── EXPERIENCIAS ─────────────────────────────────────────────────────
 
         Experience::create([
-            'company'    => 'USA GLASS LLC',
+            'company'    => 'Cliente Confidencial · EEUU',
             'role'       => ['es' => 'Desarrollador Full Stack & Especialista en Integraciones', 'en' => 'Full Stack Developer & Integration Specialist'],
-            'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
-            'start_date' => 'Enero 2026',
+            'location'   => ['es' => 'Remoto · EEUU', 'en' => 'Remote · USA'],
+            'start_date' => '2026-01-01',
             'end_date'   => null,
             'is_current' => true,
             'achievements' => [
                 'es' => [
-                    'Integración de Plataformas: Diseñé y construí un flujo de integraciones unificadas para conectar GoHighLevel (GHL), Slack, servicios de email, Nextiva y QuickBooks, automatizando los flujos operativos y de facturación.',
-                    'Reorganización Web: Reestructuré y consolidé un ecosistema compuesto por 15 sitios web corporativos bajo estándares modernos de rendimiento, optimización y seguridad informática.',
+                    'Eliminé el registro manual de pagos en 15 sitios web diseñando una capa de integración que conecta GoHighLevel, Slack, Nextiva, email y QuickBooks: cada transacción genera su factura, notifica al equipo y actualiza el sistema telefónico automáticamente.',
+                    'Consolidé un ecosistema de 15 sitios corporativos bajo estándares modernos de rendimiento, SEO y seguridad, reduciendo la carga operativa del equipo de TI.',
                 ],
                 'en' => [
-                    'Platform Integration: Designed and built a unified integration flow connecting GoHighLevel (GHL), Slack, email services, Nextiva and QuickBooks, automating operational and billing workflows.',
-                    'Web Reorganization: Restructured and consolidated an ecosystem of 15 corporate websites under modern performance, optimization and cybersecurity standards.',
+                    'Eliminated manual payment logging across 15 websites by architecting an integration layer connecting GoHighLevel, Slack, Nextiva, email, and QuickBooks — each transaction now auto-generates its invoice, alerts the team, and updates the phone system.',
+                    'Consolidated a 15-site corporate ecosystem under unified performance, SEO, and security standards, reducing IT team operational overhead.',
+                ],
+            ],
+        ]);
+
+        Experience::create([
+            'company'    => 'GSD CONSULTING',
+            'role'       => ['es' => 'Consultor Técnico de TI & Desarrollador de IA', 'en' => 'IT Technical Consultant & AI Developer'],
+            'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
+            'start_date' => '2025-09-01',
+            'end_date'   => '2026-02-01',
+            'is_current' => false,
+            'achievements' => [
+                'es' => [
+                    'Construí un ATS con IA que extrae datos de hojas de vida y evalúa candidatos mediante análisis de sentimiento y detección de nivel de inglés a partir de video, eliminando semanas de preselección manual.',
+                    'Desarrollé un bot interactivo en Slack que guía paso a paso la inducción de nuevos empleados, estandarizando el onboarding sin intervención humana.',
+                    'Integré Time Doctor con Slack para automatizar reportes de asistencia y unifiqué el monitoreo de equipos remotos en un solo panel web.',
+                    'Lideré la estrategia técnica como desarrollador principal, coordinando al equipo de soporte de TI.',
+                ],
+                'en' => [
+                    'Built an AI-powered ATS that scrapes CV data and scores candidates through sentiment analysis and English-level detection from video, eliminating weeks of manual pre-screening.',
+                    'Developed an interactive Slack bot that guides new hires through onboarding step by step, standardizing the process without human intervention.',
+                    'Integrated Time Doctor with Slack to automate attendance reports and unified remote-team monitoring in a single web dashboard.',
+                    'Led technical strategy as principal developer, coordinating IT support staff.',
                 ],
             ],
         ]);
@@ -41,24 +64,24 @@ class CVSeeder extends Seeder
         Experience::create([
             'company'    => 'ALCOCK AND ASSOCIATES',
             'role'       => ['es' => 'Senior Full Stack Developer & IT Lead', 'en' => 'Senior Full Stack Developer & IT Lead'],
-            'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
-            'start_date' => 'Diciembre 2024',
-            'end_date'   => 'Enero 2026',
+            'location'   => ['es' => 'Remoto · EEUU', 'en' => 'Remote · USA'],
+            'start_date' => '2024-12-01',
+            'end_date'   => '2026-01-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Gestión de TI: Dirigí la estrategia de tecnología interna como desarrollador principal de la firma, coordinando a una persona dedicada al soporte de TI.',
-                    'Reportes y Datos con IA: Utilicé herramientas de IA para optimizar la generación y extracción estructurada de reportes desde el sistema legal interno, formateando los datos para su consumo automatizado a través de APIs.',
-                    'Automatización de Backups: Diseñé e implementé sistemas de respaldo automatizados para migrar de forma segura información desde sistemas legacy hacia servicios internos de la compañía.',
-                    'Integración de Sistemas Críticos: Vinculé la infraestructura de telefonía con el software legal Abacus Law utilizando APIs REST para centralizar el registro de datos operacionales.',
-                    'Optimización de Procesos: Construí aplicaciones web personalizadas y scripts de automatización (Zapier, Make) que redujeron significativamente la carga operativa manual del equipo.',
+                    'Lideré toda la estrategia tecnológica de la firma como único desarrollador, desde la hoja de ruta de sistemas hasta la coordinación del equipo de soporte de TI.',
+                    'Reduje de horas a minutos la generación de reportes legales aplicando IA para extraer y estructurar datos del sistema Abacus Law, listos para consumo automatizado vía API.',
+                    'Integré la infraestructura telefónica con Abacus Law mediante APIs REST, centralizando el registro de datos operativos y eliminando duplicación manual entre sistemas.',
+                    'Garanticé migración cero-pérdida de datos críticos diseñando un sistema de respaldos automatizados desde sistemas legacy cerrados hacia servicios internos.',
+                    'Automaticé flujos críticos del equipo legal con apps a medida y scripts Zapier/Make, reduciendo significativamente la carga operativa manual semanal.',
                 ],
                 'en' => [
-                    'IT Management: Led internal technology strategy as the firm\'s lead developer, coordinating one dedicated IT support staff member.',
-                    'AI-Powered Reports & Data: Used AI tools to optimize structured report generation and extraction from the internal legal system, formatting data for automated API consumption.',
-                    'Backup Automation: Designed and implemented automated backup systems to securely migrate data from legacy systems to internal company services.',
-                    'Critical Systems Integration: Connected telephony infrastructure with Abacus Law legal software using REST APIs to centralize operational data logging.',
-                    'Process Optimization: Built custom web apps and automation scripts (Zapier, Make) that significantly reduced the team\'s manual operational workload.',
+                    'Led the firm\'s entire technology strategy as its sole developer, owning the systems roadmap and coordinating IT support staff.',
+                    'Reduced legal report generation from hours to minutes by applying AI to extract and structure data from Abacus Law, ready for automated API consumption.',
+                    'Integrated telephony infrastructure with Abacus Law via REST APIs, centralizing operational data and eliminating manual duplication between systems.',
+                    'Guaranteed zero-loss data migration by engineering an automated backup system that moved critical records from closed legacy systems to internal services.',
+                    'Automated critical legal-team workflows with custom apps and Zapier/Make scripts, significantly reducing weekly manual workload.',
                 ],
             ],
         ]);
@@ -67,15 +90,17 @@ class CVSeeder extends Seeder
             'company'    => 'INGACOV',
             'role'       => ['es' => 'Desarrollador Full Stack (Proyecto Freelance)', 'en' => 'Full Stack Developer (Freelance Project)'],
             'location'   => ['es' => 'Colombia', 'en' => 'Colombia'],
-            'start_date' => 'Enero 2025',
-            'end_date'   => 'Agosto 2025',
+            'start_date' => '2025-01-01',
+            'end_date'   => '2025-08-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Desarrollo a Medida: Diseñé y desarrollé en Laravel un sistema de gestión integral (ERP) orientado a controlar inventarios, compras, logística y reabastecimiento para máquinas de mezcla (blending) operando en hospitales y universidades.',
+                    'Diseñé y construí como único desarrollador el ERP completo de la empresa en Laravel: inventario, compras, logística y reabastecimiento de máquinas de mezcla operando en hospitales y universidades.',
+                    'Entregué el sistema completo — desde el modelo de datos hasta el despliegue en producción — que hoy gestiona toda la operación de la compañía.',
                 ],
                 'en' => [
-                    'Custom Development: Designed and built a comprehensive management ERP in Laravel to control inventories, purchases, logistics and restocking for blending machines operating in hospitals and universities.',
+                    'Designed and built the company\'s full ERP solo in Laravel: inventory, purchasing, logistics, and restocking for blending machines deployed in hospitals and universities.',
+                    'Delivered the complete system — from data model to production deployment — which now runs the company\'s entire operation.',
                 ],
             ],
         ]);
@@ -84,17 +109,17 @@ class CVSeeder extends Seeder
             'company'    => 'KIPCLIN | HIBRYD',
             'role'       => ['es' => 'PHP Developer', 'en' => 'PHP Developer'],
             'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
-            'start_date' => 'Marzo 2024',
-            'end_date'   => 'Octubre 2024',
+            'start_date' => '2024-03-01',
+            'end_date'   => '2024-10-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Optimización de Funcionalidades: Optimicé módulos y funciones en plataformas basadas en Yii2/PHP, mejorando el rendimiento técnico y la usabilidad de las aplicaciones.',
-                    'Resolución de Errores: Colaboré activamente con el equipo de QA para identificar fallos de rendimiento y realizar refactorizaciones de código antes del despliegue en producción.',
+                    'Optimicé módulos críticos en plataformas Yii2/PHP, mejorando de forma medible el rendimiento y la usabilidad de las aplicaciones.',
+                    'Colaboré con QA para identificar cuellos de botella de rendimiento y refactorizar código antes de los despliegues a producción.',
                 ],
                 'en' => [
-                    'Feature Optimization: Optimized modules and functions on Yii2/PHP-based platforms, improving technical performance and application usability.',
-                    'Bug Resolution: Actively collaborated with the QA team to identify performance failures and refactor code before production deployment.',
+                    'Optimized critical modules on Yii2/PHP platforms, delivering measurable improvements in performance and application usability.',
+                    'Partnered with QA to surface performance bottlenecks and refactor code before production releases.',
                 ],
             ],
         ]);
@@ -103,15 +128,17 @@ class CVSeeder extends Seeder
             'company'    => 'BUILT - TECH FIRST',
             'role'       => ['es' => 'PHP Developer', 'en' => 'PHP Developer'],
             'location'   => ['es' => 'Remoto', 'en' => 'Remote'],
-            'start_date' => 'Marzo 2022',
-            'end_date'   => 'Enero 2024',
+            'start_date' => '2022-03-01',
+            'end_date'   => '2024-01-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Mantenimiento y Desarrollo: Realicé mantenimiento correctivo y desarrollo de nuevas características funcionales sobre sistemas basados en Laravel/PHP de acuerdo con las reglas de negocio del cliente.',
+                    'Entregué mantenimiento correctivo y nuevas funcionalidades en sistemas Laravel/PHP para múltiples clientes, cumpliendo con sus reglas de negocio específicas.',
+                    'Mantuve sistemas en producción estables y confiables mientras extendía funcionalidad en paralelo en varias bases de código de clientes.',
                 ],
                 'en' => [
-                    'Maintenance & Development: Performed corrective maintenance and developed new functional features on Laravel/PHP-based systems according to client business rules.',
+                    'Delivered corrective maintenance and new features on Laravel/PHP systems for multiple clients, each aligned to their specific business rules.',
+                    'Kept production systems stable and reliable while extending functionality across concurrent client codebases.',
                 ],
             ],
         ]);
@@ -120,15 +147,17 @@ class CVSeeder extends Seeder
             'company'    => 'CTI CONSULTING',
             'role'       => ['es' => 'PHP Developer', 'en' => 'PHP Developer'],
             'location'   => ['es' => 'Colombia', 'en' => 'Colombia'],
-            'start_date' => 'Enero 2022',
-            'end_date'   => 'Febrero 2022',
+            'start_date' => '2022-01-01',
+            'end_date'   => '2022-02-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Depuración de Sistemas: Realicé depuración intensiva (bug fixing) en aplicaciones heredadas (legacy) y redacté documentación técnica detallada para el departamento de sistemas.',
+                    'Realicé depuración intensiva en aplicaciones legacy y documenté la lógica de negocio no documentada para el departamento de sistemas.',
+                    'Estabilicé bases de código heredadas, entregando una base limpia y documentada al equipo para continuar el desarrollo.',
                 ],
                 'en' => [
-                    'System Debugging: Performed intensive bug fixing on legacy applications and wrote detailed technical documentation for the systems department.',
+                    'Performed intensive bug fixing on legacy applications and documented undocumented business logic for the systems department.',
+                    'Stabilized inherited codebases, handing the team a clean, documented foundation to build on.',
                 ],
             ],
         ]);
@@ -137,21 +166,42 @@ class CVSeeder extends Seeder
             'company'    => 'INCOLMOTOS YAMAHA S.A.',
             'role'       => ['es' => 'Analista de Sistemas / Desarrollador Senior', 'en' => 'Systems Analyst / Senior Developer'],
             'location'   => ['es' => 'Sabaneta, Antioquia, Colombia', 'en' => 'Sabaneta, Antioquia, Colombia'],
-            'start_date' => 'Octubre 2000',
-            'end_date'   => 'Octubre 2022',
+            'start_date' => '2000-10-01',
+            'end_date'   => '2022-10-01',
             'is_current' => false,
             'achievements' => [
                 'es' => [
-                    'Trayectoria: 22 años en la organización, dedicando los últimos 13 años exclusivamente a funciones técnicas de desarrollo de software y administración de sistemas de TI.',
-                    'Gestión de LMS: Implementación y administración a nivel nacional de la plataforma Moodle para los planes de capacitación virtual de la compañía.',
-                    'Desarrollo Corporativo: Diseño de la Intranet corporativa (Joomla) y desarrollo de módulos a medida para recursos humanos y control de producción.',
-                    'Integración de Datos: Unificación de bases de datos relacionales heterogéneas para optimizar el flujo de información de la línea de manufactura.',
+                    '22 años en la organización — los últimos 13 dedicados exclusivamente a desarrollo de software y administración de sistemas de TI.',
+                    'Implementé y administré la plataforma Moodle LMS a nivel nacional para capacitar virtualmente a toda la red de concesionarios Yamaha: cientos de empleados en múltiples ciudades, sin desplazamientos.',
+                    'Diseñé la intranet corporativa en Joomla y desarrollé módulos a medida para recursos humanos y control de producción, digitalizando procesos internos clave.',
+                    'Unifiqué bases de datos relacionales heterogéneas para optimizar el flujo de información en la línea de manufactura, eliminando inconsistencias entre sistemas.',
                 ],
                 'en' => [
-                    'Career: 22-year tenure, dedicating the last 13 years exclusively to software development and IT systems administration.',
-                    'LMS Management: National implementation and administration of the Moodle platform for the company\'s virtual training programs.',
-                    'Corporate Development: Design of the corporate Intranet (Joomla) and development of custom modules for human resources and production control.',
-                    'Data Integration: Unification of heterogeneous relational databases to optimize information flow on the manufacturing line.',
+                    '22-year tenure — the last 13 focused exclusively on software development and IT systems administration.',
+                    'Deployed and administered Moodle LMS nationwide to train the entire Yamaha dealer network virtually: hundreds of employees across multiple cities, no travel required.',
+                    'Designed the corporate intranet in Joomla and built custom modules for HR and production control, digitizing key internal processes.',
+                    'Unified heterogeneous relational databases to streamline data flow on the manufacturing line, eliminating cross-system inconsistencies.',
+                ],
+            ],
+        ]);
+
+        Experience::create([
+            'company'    => 'WEB TECHNOLOGY COLOMBIA',
+            'role'       => ['es' => 'Consultoría y Soporte Web (Independiente)', 'en' => 'Web Consulting & Support (Independent)'],
+            'location'   => ['es' => 'Colombia', 'en' => 'Colombia'],
+            'start_date' => '2014-12-01',
+            'end_date'   => null,
+            'is_current' => true,
+            'achievements' => [
+                'es' => [
+                    'Aliado tecnológico permanente que provee desarrollo web, mantenimiento e integración de sistemas para las operaciones digitales de la compañía a lo largo de más de una década.',
+                    'Mantengo sitios, integraciones e infraestructura funcionando de forma confiable, evolucionándolos conforme cambian las necesidades del negocio.',
+                    'Asesoro en decisiones técnicas e implemento mejoras de forma continua, operando como CTO externo de confianza.',
+                ],
+                'en' => [
+                    'Permanent technology partner providing web development, maintenance, and systems integration for the company\'s digital operations across more than a decade.',
+                    'Keep websites, integrations, and infrastructure running reliably, evolving them as business needs change.',
+                    'Advise on technical decisions and implement improvements continuously, operating as a trusted external CTO.',
                 ],
             ],
         ]);
@@ -160,44 +210,49 @@ class CVSeeder extends Seeder
 
         $skills = [
             // Backend
+            ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'PHP / Laravel',                     'name_en' => 'PHP / Laravel',                     'p' => 95],
             ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'Node.js',                           'name_en' => 'Node.js',                           'p' => 85],
             ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'Python',                            'name_en' => 'Python',                            'p' => 80],
-            ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'PHP / Laravel',                     'name_en' => 'PHP / Laravel',                     'p' => 95],
             ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'Yii2',                              'name_en' => 'Yii2',                              'p' => 80],
             ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'C# / .NET',                         'name_en' => 'C# / .NET',                         'p' => 70],
             ['cat_es' => 'Backend',                    'cat_en' => 'Backend',                    'name_es' => 'Go',                                'name_en' => 'Go',                                'p' => 60],
             // Frontend
-            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'Angular / AngularJS',               'name_en' => 'Angular / AngularJS',               'p' => 85],
             ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'JavaScript / jQuery',               'name_en' => 'JavaScript / jQuery',               'p' => 90],
-            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'HTML5 / CSS3 / Bootstrap',          'name_en' => 'HTML5 / CSS3 / Bootstrap',          'p' => 90],
-            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'React',                             'name_en' => 'React',                             'p' => 70],
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'TypeScript',                        'name_en' => 'TypeScript',                        'p' => 85],
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'Angular / AngularJS',               'name_en' => 'Angular / AngularJS',               'p' => 85],
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'React / Next.js',                   'name_en' => 'React / Next.js',                   'p' => 75],
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'Livewire / Alpine.js',              'name_en' => 'Livewire / Alpine.js',              'p' => 85],
+            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'HTML5 / CSS3 / Tailwind',           'name_en' => 'HTML5 / CSS3 / Tailwind',           'p' => 90],
             // Bases de Datos
             ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'MySQL / SQL Server',                'name_en' => 'MySQL / SQL Server',                'p' => 90],
-            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'NoSQL (conceptos)',                 'name_en' => 'NoSQL (concepts)',                  'p' => 65],
+            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'PostgreSQL',                        'name_en' => 'PostgreSQL',                        'p' => 80],
+            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'SQLite',                            'name_en' => 'SQLite',                            'p' => 80],
+            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'BigQuery',                          'name_en' => 'BigQuery',                          'p' => 65],
             // Arquitectura y APIs
             ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'APIs REST',                         'name_en' => 'REST APIs',                         'p' => 95],
             ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'GraphQL',                           'name_en' => 'GraphQL',                           'p' => 75],
             ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'Microservicios',                    'name_en' => 'Microservices',                     'p' => 80],
+            ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'Webhooks & Event-driven',           'name_en' => 'Webhooks & Event-driven',           'p' => 90],
+            // Integraciones
+            ['cat_es' => 'Integraciones',              'cat_en' => 'Integrations',               'name_es' => 'Zapier / Make.com',                 'name_en' => 'Zapier / Make.com',                 'p' => 90],
+            ['cat_es' => 'Integraciones',              'cat_en' => 'Integrations',               'name_es' => 'GoHighLevel',                       'name_en' => 'GoHighLevel',                       'p' => 85],
+            ['cat_es' => 'Integraciones',              'cat_en' => 'Integrations',               'name_es' => 'QuickBooks API',                    'name_en' => 'QuickBooks API',                    'p' => 80],
+            ['cat_es' => 'Integraciones',              'cat_en' => 'Integrations',               'name_es' => 'Slack API',                         'name_en' => 'Slack API',                         'p' => 85],
+            // IA y Automatización
+            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Gemini API',                        'name_en' => 'Gemini API',                        'p' => 90],
+            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'OpenAI / Claude API',               'name_en' => 'OpenAI / Claude API',               'p' => 85],
+            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'NLP / Visión Computacional',        'name_en' => 'NLP / Computer Vision',             'p' => 80],
+            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Agentes IA / Multi-agente',         'name_en' => 'AI Agents / Multi-agent',           'p' => 85],
             // Liderazgo
             ['cat_es' => 'Liderazgo & Gestión de TI', 'cat_en' => 'Leadership & IT Management', 'name_es' => 'Dirección de Estrategia Tecnológica','name_en' => 'Tech Strategy Direction',           'p' => 90],
-            ['cat_es' => 'Liderazgo & Gestión de TI', 'cat_en' => 'Leadership & IT Management', 'name_es' => 'Coordinación de Soporte TI',        'name_en' => 'IT Support Coordination',           'p' => 90],
+            ['cat_es' => 'Liderazgo & Gestión de TI', 'cat_en' => 'Leadership & IT Management', 'name_es' => 'Coordinación de Equipos TI',        'name_en' => 'IT Team Coordination',              'p' => 90],
             ['cat_es' => 'Liderazgo & Gestión de TI', 'cat_en' => 'Leadership & IT Management', 'name_es' => 'Administración de Sistemas',        'name_en' => 'Systems Administration',            'p' => 85],
             // DevOps
-            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Git',                               'name_en' => 'Git',                               'p' => 90],
-            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Docker',                            'name_en' => 'Docker',                            'p' => 80],
-            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Metodologías Ágiles / Scrum',       'name_en' => 'Agile / Scrum',                     'p' => 85],
+            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Docker / Docker Compose',           'name_en' => 'Docker / Docker Compose',           'p' => 85],
+            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Git / GitHub',                      'name_en' => 'Git / GitHub',                      'p' => 90],
             ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'CI/CD',                             'name_en' => 'CI/CD',                             'p' => 75],
-            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Automatización QA',                 'name_en' => 'QA Automation',                     'p' => 75],
-            // IA y Automatización
-            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Gemini API / OpenAI',               'name_en' => 'Gemini API / OpenAI',               'p' => 90],
-            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'NLP / Visión Computacional',        'name_en' => 'NLP / Computer Vision',             'p' => 80],
-            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Zapier / Make.com',                 'name_en' => 'Zapier / Make.com',                 'p' => 85],
-            ['cat_es' => 'IA & Automatización',        'cat_en' => 'AI & Automation',            'name_es' => 'Bots de Slack',                     'name_en' => 'Slack Bots',                        'p' => 85],
-            // Skills adicionales sincronizadas con proyectos reales
-            ['cat_es' => 'Frontend',                   'cat_en' => 'Frontend',                   'name_es' => 'TypeScript',                        'name_en' => 'TypeScript',                        'p' => 85],
-            ['cat_es' => 'Bases de Datos',             'cat_en' => 'Databases',                  'name_es' => 'PostgreSQL',                        'name_en' => 'PostgreSQL',                        'p' => 80],
             ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Web Scraping / Cheerio',            'name_en' => 'Web Scraping / Cheerio',            'p' => 80],
-            ['cat_es' => 'Arquitectura & APIs',        'cat_en' => 'Architecture & APIs',        'name_es' => 'Integración de APIs Externas',      'name_en' => 'External API Integration',          'p' => 90],
+            ['cat_es' => 'DevOps & Herramientas',      'cat_en' => 'DevOps & Tools',             'name_es' => 'Metodologías Ágiles / Scrum',       'name_en' => 'Agile / Scrum',                     'p' => 85],
         ];
 
         foreach ($skills as $s) {
@@ -212,18 +267,18 @@ class CVSeeder extends Seeder
 
         Education::create([
             'degree'      => ['es' => 'Ingeniería Informática', 'en' => 'Computer Engineering'],
-            'institution' => ['es' => 'UNISABANETA, Sabaneta, Colombia', 'en' => 'UNISABANETA, Sabaneta, Colombia'],
-            'year'        => 'Graduado (2018)',
+            'institution' => ['es' => 'UNISABANETA — Sabaneta, Colombia', 'en' => 'UNISABANETA — Sabaneta, Colombia'],
+            'year'        => '2018',
         ]);
 
         Education::create([
             'degree'      => ['es' => 'Tecnólogo en Sistemas', 'en' => 'Systems Technologist'],
-            'institution' => ['es' => 'Compuedu, Envigado, Colombia', 'en' => 'Compuedu, Envigado, Colombia'],
+            'institution' => ['es' => 'Compuedu — Envigado, Colombia', 'en' => 'Compuedu — Envigado, Colombia'],
             'year'        => '2004',
         ]);
 
         Education::create([
-            'degree'      => ['es' => 'Certificación: Web Development Full Stack', 'en' => 'Certification: Full Stack Web Development'],
+            'degree'      => ['es' => 'Certificación Full Stack Web Development', 'en' => 'Full Stack Web Development Certification'],
             'institution' => ['es' => 'LinkedIn Learning', 'en' => 'LinkedIn Learning'],
             'year'        => '',
         ]);
@@ -231,52 +286,67 @@ class CVSeeder extends Seeder
         // ─── PROYECTOS ────────────────────────────────────────────────────────
 
         Project::create([
-            'title'        => ['es' => 'ERP de Gestión Integral (INGACOV)', 'en' => 'Comprehensive Management ERP (INGACOV)'],
-            'description'  => [
-                'es' => 'Sistema ERP desarrollado en Laravel para controlar inventarios, compras, logística y reabastecimiento de máquinas de mezcla (blending) operando en hospitales y universidades.',
-                'en' => 'ERP system built in Laravel to manage inventories, purchases, logistics and restocking for blending machines operating in hospitals and universities.',
+            'title'        => [
+                'es' => 'Plataforma de Integraciones Corporativas (Cliente · EEUU)',
+                'en' => 'Corporate Integration Platform (Client · USA)',
             ],
-            'technologies' => ['Laravel', 'PHP', 'MySQL', 'REST API'],
+            'description'  => [
+                'es' => '15 sitios web, 5 plataformas conectadas, cero registro manual. Diseñé la capa de integración que unifica GoHighLevel, Slack, Nextiva, email y QuickBooks: cada pago genera su factura, notifica al equipo y actualiza el teléfono automáticamente.',
+                'en' => '15 websites, 5 platforms connected, zero manual logging. Designed the integration layer unifying GoHighLevel, Slack, Nextiva, email, and QuickBooks: every payment auto-generates its invoice, alerts the team, and updates the phone system.',
+            ],
+            'technologies' => ['GoHighLevel', 'Slack API', 'QuickBooks API', 'Nextiva', 'Make.com', 'Zapier', 'Node.js'],
             'url'          => null,
         ]);
 
         Project::create([
-            'title'        => ['es' => 'ATS con Inteligencia Artificial', 'en' => 'AI-Powered ATS'],
+            'title'        => [
+                'es' => 'ERP de Gestión Integral (INGACOV)',
+                'en' => 'Comprehensive Management ERP (INGACOV)',
+            ],
             'description'  => [
-                'es' => 'Sistema de reclutamiento automatizado que extrae datos de hojas de vida y evalúa candidatos mediante análisis de sentimiento y nivel de inglés desde grabaciones de video.',
-                'en' => 'Automated recruitment system that scrapes resume data and evaluates candidates via sentiment analysis and English proficiency from video recordings.',
+                'es' => 'ERP completo construido de cero como desarrollador único en Laravel: inventario, compras, logística y reabastecimiento para máquinas de mezcla en hospitales y universidades. Hoy gestiona toda la operación de la empresa.',
+                'en' => 'Full ERP built from scratch solo in Laravel: inventory, purchasing, logistics, and restocking for blending machines in hospitals and universities. Today it runs the company\'s entire operation.',
+            ],
+            'technologies' => ['Laravel', 'PHP', 'MySQL', 'REST API', 'Filament'],
+            'url'          => null,
+        ]);
+
+        Project::create([
+            'title'        => [
+                'es' => 'ATS con Inteligencia Artificial (GSD Consulting)',
+                'en' => 'AI-Powered ATS (GSD Consulting)',
+            ],
+            'description'  => [
+                'es' => 'Sistema de reclutamiento que automatiza la preselección de candidatos: extrae datos de hojas de vida y evalúa nivel de inglés y perfil emocional mediante análisis de sentimiento sobre grabaciones de video.',
+                'en' => 'Recruitment system automating candidate pre-screening: extracts CV data and evaluates English level and emotional profile via sentiment analysis on video recordings.',
             ],
             'technologies' => ['Python', 'NLP', 'OpenAI', 'Node.js', 'REST API'],
             'url'          => null,
         ]);
 
         Project::create([
-            'title'        => ['es' => 'Plataforma de Integraciones Corporativas (USA Glass LLC)', 'en' => 'Corporate Integration Platform (USA Glass LLC)'],
-            'description'  => [
-                'es' => 'Flujo de integraciones unificadas que conecta GoHighLevel (GHL), Slack, email, Nextiva y QuickBooks para automatizar flujos operativos y de facturación en 15 sitios web corporativos.',
-                'en' => 'Unified integration flow connecting GoHighLevel (GHL), Slack, email, Nextiva and QuickBooks to automate operational and billing workflows across 15 corporate websites.',
+            'title'        => [
+                'es' => 'Sistema de Vigilancia Rama Judicial (IA + Scraping)',
+                'en' => 'Judicial Branch Monitoring System (AI + Scraping)',
             ],
-            'technologies' => ['GoHighLevel', 'Slack API', 'QuickBooks API', 'Make.com', 'Zapier'],
+            'description'  => [
+                'es' => 'Plataforma dockerizada que vigila automáticamente el portal de providencias de la Rama Judicial colombiana: scraping Liferay/SharePoint, parsing de documentos con IA (Gemini), pre-filtro local normalizado para minimizar costos de tokens, y dashboard con aprobación manual y notificaciones SMTP.',
+                'en' => 'Dockerized platform that automatically monitors the Colombian Judicial Branch case portal: Liferay/SharePoint scraping, AI-powered document parsing (Gemini), normalized local pre-filter to minimize token costs, and a manual-approval dashboard with SMTP notifications.',
+            ],
+            'technologies' => ['Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'Gemini AI', 'Cheerio', 'SheetJS', 'SharePoint', 'Liferay'],
             'url'          => null,
         ]);
 
         Project::create([
-            'title'        => ['es' => 'Integración Telefonía – Abacus Law (Alcock & Associates)', 'en' => 'Telephony – Abacus Law Integration (Alcock & Associates)'],
+            'title'        => [
+                'es' => 'Integración Telefonía – Abacus Law (Alcock & Associates)',
+                'en' => 'Telephony – Abacus Law Integration (Alcock & Associates)',
+            ],
             'description'  => [
-                'es' => 'Integración de infraestructura de telefonía con el software legal Abacus Law via APIs REST para centralizar el registro de datos operacionales, más sistema de backups automatizados para migración segura desde sistemas legacy.',
-                'en' => 'Integration of telephony infrastructure with Abacus Law legal software via REST APIs to centralize operational data logging, plus automated backup system for secure migration from legacy systems.',
+                'es' => 'Integración de la infraestructura telefónica con el software legal Abacus Law vía REST APIs para centralizar registros operativos, más sistema de backups automatizados para migración zero-loss desde sistemas legacy cerrados.',
+                'en' => 'Integration of telephony infrastructure with Abacus Law legal software via REST APIs to centralize operational records, plus automated backup system for zero-loss migration from closed legacy systems.',
             ],
             'technologies' => ['REST API', 'PHP', 'Zapier', 'Make.com', 'Abacus Law'],
-            'url'          => null,
-        ]);
-
-        Project::create([
-            'title'        => ['es' => 'Sistema de Monitoreo Rama Judicial', 'en' => 'Judicial Branch Monitoring System'],
-            'description'  => [
-                'es' => 'Plataforma dockerizada que vigila y realiza scraping automatizado del portal de la Rama Judicial colombiana, con procesamiento de datos asistido por IA y generación de reportes estructurados en hojas de cálculo.',
-                'en' => 'Dockerized platform that monitors and automatically scrapes the Colombian Judicial Branch portal, with AI-assisted data processing and structured spreadsheet report generation.',
-            ],
-            'technologies' => ['Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'Gemini AI', 'Cheerio', 'SheetJS'],
             'url'          => null,
         ]);
     }
