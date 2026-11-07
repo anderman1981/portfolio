@@ -109,6 +109,7 @@ class JobListingResource extends Resource
                     'WeWorkRemotely' => 'WeWorkRemotely',
                     'Jobicy' => 'Jobicy',
                     'Himalayas' => 'Himalayas',
+                    'GetOnBoard' => 'Get on Board',
                 ]),
                 SelectFilter::make('band')
                     ->label('Score band')

@@ -1,0 +1,227 @@
+<title>Auditoría CV · Noviembre 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura de reporte, tablas con scroll propio, tarjeta de puntaje arriba */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --ink:#18202b; --muted:#5a6575; --line:#dde2e9;
+  --accent:#1f5f8b; --accent-soft:#e3eef6;
+  --ok:#266640; --warn:#7f5200; --bad:#a32e28;
+  --ok-soft:#e5f3ea; --warn-soft:#fbf0dc; --bad-soft:#f8e3e1;
+  --display:"Source Serif 4", Georgia, serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161d; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b5; --line:#2a3542;
+  --accent:#7fb6dd; --accent-soft:#1c2e3d;
+  --ok:#6cc08f; --warn:#e0a948; --bad:#ec7b72;
+  --ok-soft:#173025; --warn-soft:#33270f; --bad-soft:#3a1d1b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --ink:#e6ebf1; --muted:#9aa6b5; --line:#2a3542;
+  --accent:#7fb6dd; --accent-soft:#1c2e3d;
+  --ok:#6cc08f; --warn:#e0a948; --bad:#ec7b72;
+  --ok-soft:#173025; --warn-soft:#33270f; --bad-soft:#3a1d1b; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body)}
+.wrap{max-width:920px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:2.1rem}
+h2{font-size:1.45rem;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1.05rem;font-family:var(--body);font-weight:600}
+p{margin:0;max-width:68ch}
+section{display:flex;flex-direction:column;gap:16px}
+.eyebrow{font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.05rem}
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.tile b{font:600 1.6rem var(--mono);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:.85rem;line-height:1.35}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%}
+.c-bad{color:var(--bad)} .c-warn{color:var(--warn)} .c-ok{color:var(--ok)}
+.b-bad{background:var(--bad)} .b-warn{background:var(--warn)} .b-ok{background:var(--ok)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:620px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;font:500 .72rem var(--mono);padding:2px 8px;border-radius:99px;white-space:nowrap}
+.p-bad{background:var(--bad-soft);color:var(--bad)} .p-warn{background:var(--warn-soft);color:var(--warn)} .p-ok{background:var(--ok-soft);color:var(--ok)}
+ul,ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+code{font:.85em var(--mono);background:var(--accent-soft);color:var(--accent);padding:1px 5px;border-radius:4px}
+.callout{background:var(--accent-soft);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.two>div{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.funnel{display:flex;flex-direction:column;gap:8px}
+.frow{display:grid;grid-template-columns:150px 1fr 56px;gap:10px;align-items:center;font-size:.88rem}
+.frow .track{height:14px;background:var(--line);border-radius:3px;overflow:hidden}
+.frow .track i{display:block;height:100%;background:var(--accent)}
+.frow .v{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.frow{grid-template-columns:110px 1fr 44px}}
+.phase{display:flex;flex-direction:column;gap:8px;border-left:3px solid var(--accent);padding-left:14px}
+small.src{color:var(--muted);font-size:.8rem}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">Career Command Center · corte 6 nov 2026</span>
+  <h1>Auditoría del CV y del sistema de búsqueda</h1>
+  <p class="lede">Anderson Martínez Restrepo. Revisé las tres versiones del CV (PDF del 14 ago, CV web desde <code>CVSeeder.php</code> y el perfil que usa <code>/apply</code>) y el pipeline <code>jobs:scan → seen_jobs.json → /rank → /apply</code>. Las recomendaciones toman lo útil de los estudios que compartiste sobre repos de búsqueda laboral.</p>
+</header>
+
+<section>
+  <h2>Dónde estás hoy</h2>
+  <div class="score">
+    <div class="tile"><span>Contenido e impacto (web)</span><b class="c-ok">7.5</b><div class="bar"><i class="b-ok" style="width:75%"></i></div><span>Los bullets del seeder ya tienen resultados medibles.</span></div>
+    <div class="tile"><span>Contenido e impacto (PDF)</span><b class="c-warn">5</b><div class="bar"><i class="b-warn" style="width:50%"></i></div><span>Describe tareas, casi sin métricas.</span></div>
+    <div class="tile"><span>Formato ATS del PDF</span><b class="c-warn">5</b><div class="bar"><i class="b-warn" style="width:50%"></i></div><span>3 páginas, 2 columnas, títulos espaciados.</span></div>
+    <div class="tile"><span>Consistencia entre versiones</span><b class="c-bad">3</b><div class="bar"><i class="b-bad" style="width:30%"></i></div><span>Fechas y empresas no coinciden.</span></div>
+    <div class="tile"><span>Pipeline de búsqueda</span><b class="c-bad">3</b><div class="bar"><i class="b-bad" style="width:30%"></i></div><span>Detenido hace 89 días, 0 ofertas rankeadas.</span></div>
+  </div>
+  <div class="callout">
+    <h3>Conclusión</h3>
+    <p>Tu perfil es fuerte y tiene un nicho claro: <strong>Laravel/PHP más integraciones y automatización con IA</strong> (GoHighLevel, QuickBooks, Slack, telefonía, Zapier/Make). Ese nicho escasea en el mercado. Lo que te frena ahora no es el perfil. Son tres cosas: el PDF que envías se contradice con el CV web, el scanner trae sobre todo ofertas a las que no puedes aplicar desde Colombia, y desde agosto no corre nada.</p>
+  </div>
+</section>
+
+<section>
+  <h2>1. Inconsistencias del CV</h2>
+  <p>Un reclutador que abra el PDF y luego tu web o LinkedIn encuentra versiones distintas. Esto es lo más urgente porque afecta la credibilidad. La versión correcta de cada dato solo la puedes confirmar tú.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Dato</th><th>PDF (14 ago)</th><th>CV web (seeder)</th><th>Perfil de /apply</th><th>Riesgo</th></tr></thead>
+    <tbody>
+      <tr><td>USA Glass · inicio</td><td>Ene 2026</td><td>Ene 2026, como "Cliente Confidencial"</td><td>Jun 2026</td><td><span class="pill p-bad">alto</span></td></tr>
+      <tr><td>GSD Consulting</td><td>Sep 2025 – Feb 2026</td><td>Sep 2025 – Feb 2026</td><td>No aparece</td><td><span class="pill p-bad">alto</span></td></tr>
+      <tr><td>Alcock · fin</td><td>Presente</td><td>Ene 2026</td><td>Ene 2026</td><td><span class="pill p-bad">alto</span></td></tr>
+      <tr><td>Alcock · software integrado</td><td>Submit 800</td><td>Abacus Law</td><td>Abacus Law</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>INGACOV · fechas</td><td>May 2026 – Presente</td><td>Ene – Ago 2025</td><td>May 2025 – Presente</td><td><span class="pill p-bad">alto</span></td></tr>
+      <tr><td>INGACOV · tipo de máquinas</td><td>vending</td><td>de mezcla (blending)</td><td>blending</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>Web Technology Colombia</td><td>No aparece</td><td>Dic 2014 – Presente</td><td>No aparece</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>TypeScript / PostgreSQL</td><td>No aparecen</td><td>85% / 80%</td><td>Solo en un proyecto</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>React</td><td>"fundamentos"</td><td>React / Next.js 75%</td><td>React</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>Yamaha · ciudad</td><td>Girardota</td><td>Sabaneta</td><td>Sabaneta</td><td><span class="pill p-ok">bajo</span></td></tr>
+      <tr><td>Kipclin · modalidad</td><td>Hybrid</td><td>Remoto</td><td>Remoto</td><td><span class="pill p-ok">bajo</span></td></tr>
+    </tbody>
+  </table></div>
+  <p>El PDF también muestra <strong>tres trabajos "Presente" al mismo tiempo</strong> (USA Glass, Alcock e INGACOV) y Yamaha hasta oct 2022 solapado con BUILT y CTI desde ene–mar 2022. Si los solapes son reales, márcalos como freelance o medio tiempo. Sin esa aclaración, un ATS o un reclutador lo lee como error.</p>
+</section>
+
+<section>
+  <h2>2. El PDF frente a un ATS</h2>
+  <div class="two">
+    <div>
+      <h3 class="c-bad">Qué corregir</h3>
+      <ul>
+        <li><strong>3 páginas.</strong> Con 17 años, lo esperado son 2. Resume Yamaha y los roles PHP cortos de 2022–2024.</li>
+        <li><strong>"E D U CAT I O N" con letras espaciadas.</strong> Al extraer el texto sale así, y el ATS no reconoce la sección.</li>
+        <li><strong>Competencias en dos columnas.</strong> Al extraer el texto, las columnas se mezclan.</li>
+        <li><strong>Sin GitHub en el encabezado,</strong> aunque tienes repos públicos y un portafolio.</li>
+        <li><strong>Bullets sin métricas.</strong> Los del CV web ya las tienen ("de horas a minutos", "15 sitios, 5 plataformas"). El PDF quedó atrás.</li>
+        <li><strong>"Computer vision" en el resumen</strong> sin un proyecto que lo respalde. O lo respaldas o lo quitas.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="c-ok">Keywords que faltan (si las puedes respaldar)</h3>
+      <ul>
+        <li><code>TypeScript</code>, <code>PostgreSQL</code>: los usas en el Monitor Rama Judicial pero no salen en el PDF.</li>
+        <li><code>Docker</code> en un bullet de experiencia, no solo en la lista de skills.</li>
+        <li><code>AWS</code> o cualquier nube: no aparece ninguna, y casi todas las ofertas senior la piden.</li>
+        <li>Testing: <code>PHPUnit</code>/<code>Pest</code>. Hoy solo dice "QA test automation".</li>
+        <li>Laravel concreto: <code>Queues</code>, <code>Redis</code>, <code>Filament</code>, <code>Livewire</code>, versión 10/11.</li>
+        <li><code>Webhooks</code>, <code>ETL</code>, <code>System integration</code>, <code>Workflow automation</code>: tu diferenciador, escrito como lo buscan los reclutadores.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <h3>Posicionamiento: 1 CV base y 3 variantes</h3>
+    <p>Los estudios recomiendan un CV base más variantes solo para las ofertas con buen score. Para tu perfil propongo estas tres:</p>
+    <ol>
+      <li><strong>Senior Laravel / PHP Backend Engineer</strong>: ERP INGACOV, BUILT, Kipclin, MySQL.</li>
+      <li><strong>Full-Stack Engineer (Laravel + React/Angular)</strong>: el volumen más alto de ofertas.</li>
+      <li><strong>Integrations &amp; Automation Engineer (AI)</strong>: USA Glass, Alcock, ATS con IA. Apunta a títulos poco competidos: <em>Integration Engineer, Solutions Engineer, Forward Deployed Engineer, Automation Engineer</em>.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>3. El sistema de búsqueda</h2>
+  <p>Mismo diagnóstico que hacen los estudios: el scanner trae volumen pero poca señal. Estos son los números de <code>job_scraper/seen_jobs.json</code>:</p>
+  <div class="funnel">
+    <div class="frow"><span>Ofertas guardadas</span><div class="track"><i style="width:100%"></i></div><span class="v">409</span></div>
+    <div class="frow"><span>Fit "high" por título</span><div class="track"><i style="width:10.3%"></i></div><span class="v">42</span></div>
+    <div class="frow"><span>Compatibles con LATAM, Anywhere o Colombia</span><div class="track"><i style="width:4.6%"></i></div><span class="v">19</span></div>
+    <div class="frow"><span>Rankeadas con /rank</span><div class="track"><i style="width:0%"></i></div><span class="v">0</span></div>
+    <div class="frow"><span>En el tracker</span><div class="track"><i style="width:.5%"></i></div><span class="v">2</span></div>
+  </div>
+  <small class="src">Ubicación de las 409: 116 solo EE. UU., 192 otros países (EU, UK, Brasil…), 82 sin ubicación, 19 compatibles. Por fuente: Himalayas 169, Jobicy 123, WeWorkRemotely 60, RemoteOK 29, Remotive 28.</small>
+
+  <div class="scroll"><table>
+    <thead><tr><th>Hallazgo</th><th>Evidencia</th><th>Severidad</th></tr></thead>
+    <tbody>
+      <tr><td>El scanner está detenido</td><td>Última oferta del 9 ago 2026. Ningún contenedor del CV está corriendo, así que el <code>twiceDailyAt(6,18)</code> no se ejecuta.</td><td><span class="pill p-bad">crítico</span></td></tr>
+      <tr><td>No filtra por ubicación</td><td>El 95% de las ofertas no acepta candidatos en Colombia. Es ruido que después le cuesta tokens a <code>/rank</code>.</td><td><span class="pill p-bad">crítico</span></td></tr>
+      <tr><td>El framework de evaluación tiene placeholders sin llenar</td><td>12 placeholders en <code>04-job-evaluation.md</code> (skills fuertes y débiles, metas, deal-breakers) y <code>02-behavioral-profile.md</code> completo en blanco. <code>/rank</code> y <code>/apply</code> puntúan contra plantillas vacías.</td><td><span class="pill p-bad">crítico</span></td></tr>
+      <tr><td>El fit se calcula solo con el título</td><td>Basta con "engineer" o "developer" para quedar en medium, así que un Senior QA Engineer cuenta igual que un Laravel Dev.</td><td><span class="pill p-warn">alto</span></td></tr>
+      <tr><td>Bugs de parseo</td><td>Himalayas guarda la empresa como <code>"name"</code> y WWR como <code>"https"</code>.</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>Duplicados</td><td>Hay ofertas repetidas con URL distinta, por ejemplo PSI CRO "Full stack developer (AI Solutions)" dos veces. Falta deduplicar por empresa y título normalizados.</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>El tracker no refleja lo que hiciste</td><td>Hay 6 CVs adaptados en <code>cv/</code> (Helios, Higharc, IOHK, Tractian…) pero solo 2 filas en el CSV. Sin esos datos no puedes medir respuesta por fuente.</td><td><span class="pill p-warn">medio</span></td></tr>
+      <tr><td>Faltan fuentes LATAM</td><td>Las 5 APIs son globales. No están Get on Board, Torre ni los boards Greenhouse/Lever/Ashby de empresas que contratan en LATAM.</td><td><span class="pill p-warn">alto</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>4. Qué tomar de los estudios</h2>
+  <p>Tu sistema ya cubre lo que hacen career-ops, ai-job-search o proficiently-claude-skills: scraping, scoring contra el CV, CV y carta adaptados, y tracking. <strong>No hace falta instalar otro stack.</strong> Conviene incorporar cuatro ideas:</p>
+  <div class="two">
+    <div><h3>Score ponderado con umbral</h3><p>Un score de 0 a 100 en la base de datos según stack (Laravel/PHP 3, MySQL 2, React/Angular/Node 2, API/integraciones 2, Docker/AWS 1), seniority, ubicación y salario. Solo pasa a <code>/rank</code> lo que tenga 60 o más.</p></div>
+    <div><h3>Aprobación humana por Telegram</h3><p>Es el patrón de drajb y proficiently. El bot te manda empresa, rol, score, coincidencias y el CV propuesto, y tú respondes APROBAR, EDITAR o RECHAZAR. El bot solo responde a tu <code>chat_id</code>.</p></div>
+    <div><h3>Tracker con métricas de funnel</h3><p>Agregar los campos salario, contacto, próxima acción con fecha y fecha de respuesta. Una vista semanal con ofertas, postulaciones, entrevistas, tasa de respuesta por fuente y días hasta la primera respuesta.</p></div>
+    <div><h3>Nada de auto-aplicación</h3><p>Los estudios coinciden: aplicar en masa viola los términos de LinkedIn y de los ATS y te quema con reclutadores. El envío final siempre lo haces tú. Tampoco scraping de LinkedIn.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>5. Plan propuesto</h2>
+  <div class="phase">
+    <h3>Fase 1 · Que el sistema traiga ofertas útiles (puedo hacerla ya)</h3>
+    <ul>
+      <li>Levantar el contenedor y verificar que corra el scheduler.</li>
+      <li>Filtro de ubicación (LATAM, Americas, Anywhere, Worldwide, Colombia) y score ponderado guardado en <code>job_listings</code>.</li>
+      <li>Corregir el parseo de Himalayas y WWR, y deduplicar por empresa y título.</li>
+      <li>Agregar Get on Board como fuente LATAM.</li>
+      <li>Correr <code>jobs:scan</code> y <code>/rank</code> para darte un shortlist real.</li>
+    </ul>
+  </div>
+  <div class="phase">
+    <h3>Fase 2 · Un solo CV verdadero (necesita tus respuestas)</h3>
+    <ul>
+      <li>Fijar las fechas y datos de la tabla de la sección 1 en el seeder y copiarlos tal cual a <code>01-candidate-profile.md</code>.</li>
+      <li>Llenar <code>04-job-evaluation.md</code> y <code>02-behavioral-profile.md</code>.</li>
+      <li>Regenerar el PDF en 2 páginas, una columna, con encabezados normales, GitHub y las métricas del CV web.</li>
+      <li>Crear las tres variantes en <code>05-cv-templates.md</code>.</li>
+    </ul>
+  </div>
+  <div class="phase">
+    <h3>Fase 3 · Aprobación y métricas</h3>
+    <ul>
+      <li>Bot de Telegram con aprobación (sin envío automático).</li>
+      <li>Campos nuevos en el tracker, con un widget de funnel en Filament.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Preguntas para la Fase 2</h2>
+  <ol>
+    <li>¿Fechas reales de USA Glass (¿ene o jun 2026?), INGACOV (¿2025 o 2026?, ¿sigue activo?) y el fin de Alcock?</li>
+    <li>En Alcock, ¿el software fue Abacus Law, Submit 800 o ambos?</li>
+    <li>INGACOV: ¿máquinas de mezcla o vending?</li>
+    <li>¿Puedes nombrar a USA Glass públicamente o se queda como "Cliente confidencial"?</li>
+    <li>¿Incluyo GSD Consulting y Web Technology Colombia en todas las versiones?</li>
+    <li>¿Qué tan real es tu nivel en TypeScript, PostgreSQL, React y alguna nube (AWS, GCP)?</li>
+    <li>¿Salario mínimo en USD, y aceptas contrato o solo empleo directo?</li>
+  </ol>
+</section>
+</div>
