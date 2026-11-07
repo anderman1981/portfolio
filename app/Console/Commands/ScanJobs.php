@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\JobListing;
+use App\Services\JobScorer;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -17,6 +18,8 @@ class ScanJobs extends Command
         'laravel', 'php', 'full stack', 'fullstack', 'full-stack', 'node',
         'javascript', 'angular', 'backend', 'python', 'developer', 'engineer',
     ];
+
+    protected int $duplicates = 0;
 
     protected string $ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -35,7 +38,7 @@ class ScanJobs extends Command
         $found += $this->scanHimalayas();
 
         $this->newLine();
-        $this->info("Scan complete. {$found} matching listings saved/updated.");
+        $this->info("Scan complete. {$found} matching listings saved/updated, {$this->duplicates} cross-source duplicates skipped.");
         $this->line('Total in database: ' . JobListing::count());
 
         // Keep the Claude Code /rank + /apply workflow in sync
@@ -55,15 +58,40 @@ class ScanJobs extends Command
         return false;
     }
 
+    /**
+     * Normalize, score and upsert one listing.
+     * `seniority` and `timezones` are scoring hints only, not columns.
+     * A new listing whose company+title already exists from another source is skipped.
+     */
     protected function save(array $data): bool
     {
         try {
+            $scorer = app(JobScorer::class);
+            $data['description'] = JobScorer::plainText($data['description'] ?? null);
+            $result = $scorer->score($data);
+            unset($data['seniority'], $data['timezones']);
+
+            $data['score'] = $result['score'];
+            $data['score_breakdown'] = $result['breakdown'];
+            $data['eligible_region'] = $result['eligible_region'];
+            $data['dedupe_hash'] = JobScorer::dedupeHash($data['company'] ?? null, $data['title'] ?? null);
+
+            $existing = JobListing::where('source', $data['source'])->where('url', $data['url'])->first();
+            if (! $existing && $data['dedupe_hash']) {
+                $twin = JobListing::where('dedupe_hash', $data['dedupe_hash'])->whereNull('duplicate_of')->exists();
+                if ($twin) {
+                    $this->duplicates++;
+                    return false;
+                }
+            }
+
             JobListing::updateOrCreate(
                 ['source' => $data['source'], 'url' => $data['url']],
                 $data
             );
             return true;
         } catch (\Throwable $e) {
+            $this->warn('  save failed: ' . $e->getMessage());
             return false;
         }
     }
@@ -92,6 +120,7 @@ class ScanJobs extends Command
                     'job_type' => $j['job_type'] ?? null,
                     'location' => $j['candidate_required_location'] ?? null,
                     'tags' => implode(', ', $j['tags'] ?? []),
+                    'description' => $j['description'] ?? null,
                     'published_at' => isset($j['publication_date']) ? substr($j['publication_date'], 0, 10) : null,
                 ])) $count++;
             }
@@ -126,6 +155,7 @@ class ScanJobs extends Command
                     'salary' => $salary,
                     'location' => $j['location'] ?? null,
                     'tags' => implode(', ', $j['tags'] ?? []),
+                    'description' => $j['description'] ?? null,
                     'published_at' => isset($j['date']) ? substr($j['date'], 0, 10) : null,
                 ])) $count++;
             }
@@ -148,6 +178,8 @@ class ScanJobs extends Command
                 preg_match('/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/s', $it, $mt);
                 preg_match('/<link>(.*?)<\/link>/s', $it, $ml);
                 preg_match('/<pubDate>(.*?)<\/pubDate>/s', $it, $md);
+                preg_match('/<region>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/region>/s', $it, $mr);
+                preg_match('/<description>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/description>/s', $it, $mdesc);
                 $title = trim($mt[1] ?? '');
                 if (!$this->matches($title)) continue;
                 // Split "Company: Title" format
@@ -160,6 +192,8 @@ class ScanJobs extends Command
                     'title' => $title,
                     'company' => $company,
                     'url' => trim($ml[1] ?? ''),
+                    'location' => isset($mr[1]) ? trim($mr[1]) : null,
+                    'description' => isset($mdesc[1]) ? html_entity_decode($mdesc[1]) : null,
                     'published_at' => isset($md[1]) ? date('Y-m-d', strtotime($md[1])) : null,
                 ])) $count++;
             }
@@ -188,6 +222,8 @@ class ScanJobs extends Command
                     'salary' => (!empty($j['annualSalaryMin'])) ? '$' . $j['annualSalaryMin'] . ' - $' . ($j['annualSalaryMax'] ?? '') : null,
                     'job_type' => is_array($j['jobType'] ?? null) ? implode(', ', $j['jobType']) : ($j['jobType'] ?? null),
                     'location' => $j['jobGeo'] ?? null,
+                    'description' => $j['jobDescription'] ?? ($j['jobExcerpt'] ?? null),
+                    'seniority' => $j['jobLevel'] ?? null,
                     'published_at' => isset($j['pubDate']) ? substr($j['pubDate'], 0, 10) : null,
                 ])) $count++;
             }
@@ -214,8 +250,12 @@ class ScanJobs extends Command
                     'title' => $title,
                     'company' => $j['companyName'] ?? '',
                     'url' => $url,
-                    'location' => is_array($j['locationRestrictions'] ?? null) ? implode(', ', $j['locationRestrictions']) : null,
+                    'location' => $this->himalayasLocation($j['locationRestrictions'] ?? null),
+                    'salary' => !empty($j['maxSalary']) ? trim(($j['currency'] ?? '') . ' ' . ($j['minSalary'] ?? '') . ' - ' . $j['maxSalary']) : null,
                     'tags' => is_array($j['categories'] ?? null) ? implode(', ', $j['categories']) : null,
+                    'description' => $j['description'] ?? ($j['excerpt'] ?? null),
+                    'seniority' => is_array($j['seniority'] ?? null) ? implode(', ', $j['seniority']) : null,
+                    'timezones' => is_array($j['timezoneRestrictions'] ?? null) ? $j['timezoneRestrictions'] : null,
                     'published_at' => isset($j['pubDate']) ? date('Y-m-d', (int)$j['pubDate']) : null,
                 ])) $count++;
             }
@@ -224,5 +264,15 @@ class ScanJobs extends Command
         }
         $this->line("  → {$count} jobs");
         return $count;
+    }
+
+    /** Himalayas returns either plain country names or {name: ...} objects. */
+    protected function himalayasLocation($restrictions): ?string
+    {
+        if (!is_array($restrictions) || $restrictions === []) {
+            return null;
+        }
+        $names = array_map(fn ($r) => is_array($r) ? ($r['name'] ?? '') : (string) $r, $restrictions);
+        return implode(', ', array_filter($names)) ?: null;
     }
 }

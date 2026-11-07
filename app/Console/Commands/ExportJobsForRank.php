@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\JobListing;
+use App\Services\JobScorer;
 use Illuminate\Console\Command;
 
 class ExportJobsForRank extends Command
@@ -11,11 +12,7 @@ class ExportJobsForRank extends Command
 
     protected $description = 'Export job_listings to job_scraper/seen_jobs.json for the /rank and /apply Claude Code workflow';
 
-    // High-signal keywords for the candidate profile
-    protected array $high = ['laravel', 'php', 'full stack', 'fullstack', 'full-stack'];
-    protected array $medium = ['node', 'python', 'angular', 'javascript', 'backend', 'developer', 'engineer'];
-
-    public function handle(): int
+    public function handle(JobScorer $scorer): int
     {
         $path = $this->option('path') ?: base_path('job_scraper/seen_jobs.json');
         @mkdir(dirname($path), 0755, true);
@@ -33,7 +30,8 @@ class ExportJobsForRank extends Command
             $key = $job->url;
             $prev = $existing[$key] ?? null;
 
-            $seen[$key] = [
+            // Merge over the previous entry so /rank's additive fields (rank_score, rank_verdict…) survive re-exports
+            $seen[$key] = array_merge($prev ?? [], [
                 'title' => $job->title,
                 'company' => $job->company ?: '',
                 'url' => $job->url,
@@ -41,10 +39,15 @@ class ExportJobsForRank extends Command
                 'location' => $job->location ?: '',
                 'source' => $job->source,
                 'first_seen' => $prev['first_seen'] ?? optional($job->published_at)->format('Y-m-d') ?? now()->format('Y-m-d'),
-                'fit' => $prev['fit'] ?? $this->fit($job->title),
+                // fit band is derived from the JobScorer pre-score (config/job_search.php)
+                'fit' => $scorer->band($job->score),
+                'pre_score' => $job->score,
+                'eligible_region' => $job->eligible_region,
+                'stack_matched' => $job->score_breakdown['stack_matched'] ?? [],
+                'description_excerpt' => $job->description ? mb_substr($job->description, 0, 1200) : '',
                 // Keep prior workflow status; mark applied ones from the DB flag
                 'status' => $job->is_applied ? 'evaluated' : ($prev['status'] ?? 'new'),
-            ];
+            ]);
         }
 
         file_put_contents($path, json_encode(['seen' => $seen], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
@@ -54,17 +57,5 @@ class ExportJobsForRank extends Command
         $this->line("Fit breakdown: high={$counts->get('high',0)} medium={$counts->get('medium',0)} low={$counts->get('low',0)}");
 
         return self::SUCCESS;
-    }
-
-    protected function fit(string $title): string
-    {
-        $t = strtolower($title);
-        foreach ($this->high as $k) {
-            if (str_contains($t, $k)) return 'high';
-        }
-        foreach ($this->medium as $k) {
-            if (str_contains($t, $k)) return 'medium';
-        }
-        return 'low';
     }
 }

@@ -11,12 +11,15 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\Filter;
 use Filament\Actions\EditAction;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Textarea;
+use Illuminate\Database\Eloquent\Builder;
 
 class JobListingResource extends Resource
 {
@@ -43,13 +46,14 @@ class JobListingResource extends Resource
             Toggle::make('is_favorite')->label('Favorite'),
             Toggle::make('is_applied')->label('Applied'),
             Toggle::make('is_dismissed')->label('Dismissed'),
+            Textarea::make('description')->disabled()->rows(12)->columnSpanFull(),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('published_at', 'desc')
+            ->defaultSort('score', 'desc')
             ->columns([
                 IconColumn::make('is_favorite')
                     ->label('★')
@@ -58,6 +62,35 @@ class JobListingResource extends Resource
                     ->falseIcon(Heroicon::OutlinedStar)
                     ->action(function (JobListing $record) {
                         $record->update(['is_favorite' => !$record->is_favorite]);
+                    }),
+                TextColumn::make('score')
+                    ->label('Score')
+                    ->sortable()
+                    ->badge()
+                    ->placeholder('—')
+                    ->color(fn (?int $state) => match (true) {
+                        $state === null => 'gray',
+                        $state >= config('job_search.bands.high') => 'success',
+                        $state >= config('job_search.bands.medium') => 'warning',
+                        default => 'gray',
+                    })
+                    ->tooltip(fn (JobListing $r) => $r->score_breakdown
+                        ? 'Stack ' . $r->score_breakdown['stack'] . ' (' . implode(', ', $r->score_breakdown['stack_matched'] ?? []) . ')'
+                            . ' · Role ' . $r->score_breakdown['role']
+                            . ' · Seniority ' . $r->score_breakdown['seniority'] . ' (' . $r->score_breakdown['seniority_level'] . ')'
+                            . ' · Region ' . $r->score_breakdown['region']
+                            . ' · Salary ' . $r->score_breakdown['salary']
+                            . ($r->score_breakdown['penalty'] ? ' · Penalty ' . $r->score_breakdown['penalty'] . ' (' . implode(', ', $r->score_breakdown['penalty_terms']) . ')' : '')
+                        : null),
+                IconColumn::make('eligible_region')
+                    ->label('LATAM')
+                    ->boolean()
+                    ->trueIcon(Heroicon::CheckCircle)
+                    ->falseIcon(Heroicon::XCircle)
+                    ->tooltip(fn (JobListing $r) => match ($r->eligible_region) {
+                        true => 'Open to Colombia / LATAM / worldwide',
+                        false => 'Restricted to another region',
+                        default => 'Region not stated',
                     }),
                 TextColumn::make('title')->searchable()->wrap()->limit(60),
                 TextColumn::make('company')->searchable()->sortable(),
@@ -77,6 +110,33 @@ class JobListingResource extends Resource
                     'Jobicy' => 'Jobicy',
                     'Himalayas' => 'Himalayas',
                 ]),
+                SelectFilter::make('band')
+                    ->label('Score band')
+                    ->options(['high' => 'High (70+)', 'medium' => 'Medium (50-69)', 'low' => 'Low (<50)'])
+                    ->query(function (Builder $query, array $data) {
+                        $high = config('job_search.bands.high');
+                        $medium = config('job_search.bands.medium');
+                        return match ($data['value'] ?? null) {
+                            'high' => $query->where('score', '>=', $high),
+                            'medium' => $query->where('score', '>=', $medium)->where('score', '<', $high),
+                            'low' => $query->where(fn ($q) => $q->where('score', '<', $medium)->orWhereNull('score')),
+                            default => $query,
+                        };
+                    }),
+                TernaryFilter::make('eligible_region')
+                    ->label('Region')
+                    ->placeholder('All')
+                    ->trueLabel('Eligible (LATAM / worldwide)')
+                    ->falseLabel('Restricted')
+                    ->queries(
+                        true: fn (Builder $q) => $q->where('eligible_region', true),
+                        false: fn (Builder $q) => $q->where('eligible_region', false),
+                        blank: fn (Builder $q) => $q,
+                    ),
+                Filter::make('hide_duplicates')
+                    ->label('Hide cross-source duplicates')
+                    ->query(fn (Builder $q) => $q->whereNull('duplicate_of'))
+                    ->default(),
                 TernaryFilter::make('is_favorite')->label('Favorites'),
                 TernaryFilter::make('is_applied')->label('Applied'),
                 TernaryFilter::make('apply_queued')->label('Queued for /apply'),

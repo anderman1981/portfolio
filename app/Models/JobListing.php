@@ -10,6 +10,8 @@ class JobListing extends Model
         'source', 'external_id', 'title', 'company', 'url', 'salary',
         'job_type', 'location', 'tags', 'published_at',
         'is_favorite', 'is_applied', 'is_dismissed', 'apply_queued',
+        'description', 'score', 'score_breakdown', 'eligible_region',
+        'dedupe_hash', 'duplicate_of',
     ];
 
     protected $casts = [
@@ -18,11 +20,14 @@ class JobListing extends Model
         'is_applied' => 'boolean',
         'is_dismissed' => 'boolean',
         'apply_queued' => 'boolean',
+        'score' => 'integer',
+        'score_breakdown' => 'array',
+        'eligible_region' => 'boolean',
     ];
 
     public function scopeActive($query)
     {
-        return $query->where('is_dismissed', false);
+        return $query->where('is_dismissed', false)->whereNull('duplicate_of');
     }
 
     public function scopeFavorites($query)

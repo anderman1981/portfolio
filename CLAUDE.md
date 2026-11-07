@@ -44,6 +44,7 @@ Sistema unificado de CV, búsqueda de empleo y postulaciones. Combina una **app 
 | Comandos slash | `.claude/commands/` |
 | Scanner multi-fuente | `app/Console/Commands/ScanJobs.php` (`jobs:scan`) |
 | Puente al workflow | `app/Console/Commands/ExportJobsForRank.php` (`jobs:export`) |
+| Pre-score 0-100 + región + dedupe | `app/Services/JobScorer.php`, pesos en `config/job_search.php`; tras ajustar pesos: `php artisan jobs:rescore` |
 | Herramienta de salarios | `job-tools/salary_lookup.py` |
 
 ## Notas
